@@ -16,6 +16,7 @@ export const ImageIndexes = styled.View`
   flex-direction: row;
   align-self: flex-end;
   padding-right: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(24)}px;
 `;
 
 export const ImageIndex = styled.View<ImageIndexProps>`

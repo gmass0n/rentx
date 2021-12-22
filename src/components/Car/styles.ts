@@ -21,6 +21,7 @@ export const Brand = styled.Text`
   color: ${({ theme }) => theme.colors.text_details};
   font-size: ${RFValue(10)}px;
   text-transform: uppercase;
+
   margin-bottom: ${RFValue(4)}px;
 `;
 
@@ -45,8 +46,9 @@ export const Period = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.text_details};
   font-size: ${RFValue(10)}px;
-  margin-bottom: ${RFValue(4)}px;
   text-transform: uppercase;
+
+  margin-bottom: ${RFValue(4)}px;
 `;
 
 export const Price = styled.Text`
