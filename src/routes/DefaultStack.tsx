@@ -7,10 +7,12 @@ import { Scheduling } from "../screens/Scheduling";
 import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { MyCars } from "../screens/MyCars";
+import { Splash } from "../screens/Splash";
 
 import { CarDTO } from "../dtos/CarDTO";
 
 export type DefaultStackParamList = {
+  Splash: undefined;
   Home: undefined;
   CarDetails: { car: CarDTO };
   Scheduling: { car: CarDTO };
@@ -24,7 +26,9 @@ const { Navigator, Screen } =
 
 export const DefaultStack: FC = () => {
   return (
-    <Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+    <Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+      <Screen name="Splash" component={Splash} />
+
       <Screen name="Home" component={Home} />
 
       <Screen name="CarDetails" component={CarDetails} />
