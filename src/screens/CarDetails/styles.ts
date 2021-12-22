@@ -1,6 +1,11 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
-import { isIphoneX, getBottomSpace } from "react-native-iphone-x-helper";
+import {
+  isIphoneX,
+  getBottomSpace,
+  getStatusBarHeight,
+} from "react-native-iphone-x-helper";
+import Animated from "react-native-reanimated";
 
 export const Container = styled.View`
   flex: 1;
@@ -8,27 +13,37 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background_secondary};
 `;
 
-export const Header = styled.SafeAreaView`
+export const AnimatedHeader = styled(Animated.View)`
   position: absolute;
+  overflow: hidden;
   z-index: 5;
+
+  background-color: ${({ theme }) => theme.colors.background_secondary};
 `;
 
-export const HeaderContent = styled.View`
+export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
+  position: absolute;
+  z-index: 10;
+
   padding: ${RFValue(24)}px;
+  padding-top: ${getStatusBarHeight(true) + RFValue(24)}px;
 `;
 
-export const CarImagesContainer = styled.SafeAreaView``;
-
-export const CarImagesContent = styled.View`
-  margin-top: ${RFValue(32)}px;
+export const CarImagesContent = styled(Animated.View)`
+  margin-top: ${getStatusBarHeight(true) + RFValue(32)}px;
 `;
 
-export const Content = styled.ScrollView.attrs({
-  contentContainerStyle: { padding: RFValue(24), alignItems: "center" },
+export const Content = styled(Animated.ScrollView).attrs({
+  contentContainerStyle: {
+    padding: RFValue(24),
+    paddingBottom: 0,
+    paddingTop: RFValue(24) + 265,
+    alignItems: "center",
+  },
   showsVerticalScrollIndicator: false,
 })``;
 

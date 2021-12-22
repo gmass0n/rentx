@@ -1,6 +1,15 @@
 import { FC } from "react";
 import { StatusBar } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import Animated, {
+  useSharedValue,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  interpolate,
+  Extrapolate,
+} from "react-native-reanimated";
+
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 import { DefaultStackParamList } from "../../routes/DefaultStack";
 
@@ -11,9 +20,8 @@ import { Button } from "../../components/Button";
 
 import {
   Container,
+  AnimatedHeader,
   Header,
-  HeaderContent,
-  CarImagesContainer,
   CarImagesContent,
   Content,
   Details,
@@ -27,13 +35,25 @@ import {
   About,
   Footer,
 } from "./styles";
-import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 type CarDetailsScreenRouteProp = RouteProp<DefaultStackParamList, "CarDetails">;
 
 export const CarDetails: FC = () => {
   const navigation = useNavigation();
   const route = useRoute<CarDetailsScreenRouteProp>();
+
+  const scrollY = useSharedValue(0);
+  const scrollHandler = useAnimatedScrollHandler((event) => {
+    scrollY.value = event.contentOffset.y;
+  });
+
+  const haderStyle = useAnimatedStyle(() => ({
+    height: interpolate(scrollY.value, [0, 200], [265, 115], Extrapolate.CLAMP),
+  }));
+
+  const imagesSliderStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollY.value, [0, 150], [1, 0]),
+  }));
 
   const { car } = route.params;
 
@@ -49,19 +69,17 @@ export const CarDetails: FC = () => {
         backgroundColor="transparent"
       />
 
-      <Header>
-        <HeaderContent>
+      <AnimatedHeader style={haderStyle}>
+        <Header>
           <BackButton />
-        </HeaderContent>
-      </Header>
+        </Header>
 
-      <CarImagesContainer>
-        <CarImagesContent>
+        <CarImagesContent style={imagesSliderStyle}>
           <ImagesSlider urls={car.photos} />
         </CarImagesContent>
-      </CarImagesContainer>
+      </AnimatedHeader>
 
-      <Content>
+      <Content onScroll={scrollHandler} scrollEventThrottle={16}>
         <Details>
           <Description>
             <Brand>{car.brand}</Brand>

@@ -1,7 +1,11 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { FlatList } from "react-native";
-import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+  isIphoneX,
+} from "react-native-iphone-x-helper";
 import { ComponentType } from "react";
 import { RectButton } from "react-native-gesture-handler";
 
