@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import AppLoading from "expo-app-loading";
 import {
   useFonts,
@@ -10,9 +11,10 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold,
 } from "@expo-google-fonts/archivo";
+import { ThemeProvider } from "styled-components";
 
 import { Home } from "./src/screens/Home";
-import { ThemeProvider } from "styled-components";
+
 import { theme } from "./src/styles/theme";
 
 export const App: FC = () => {
