@@ -1,15 +1,16 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { Alert } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
-import SpeedSVG from "../../assets/speed.svg";
-import AccelerationSVG from "../../assets/acceleration.svg";
-import ForceSVG from "../../assets/force.svg";
-import GasolineSVG from "../../assets/gasoline.svg";
-import ExchangeSVG from "../../assets/exchange.svg";
-import PeopleSVG from "../../assets/people.svg";
+import { api } from "../../services/api";
+
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
+import { getPlatformDate } from "../../utils/getPlatformDate";
 
 import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
@@ -17,6 +18,8 @@ import { Accessory } from "../../components/Accessory";
 import { Button } from "../../components/Button";
 
 import { DefaultStackParamList } from "../../routes/DefaultStack";
+
+import { ScheduleByCarDTO } from "../../dtos/ScheduleByCarDTO";
 
 import {
   Container,
@@ -51,13 +54,69 @@ type SchedulingDetailsScreenRouteProp = RouteProp<
   "SchedulingDetails"
 >;
 
+interface RentaPeriodProps {
+  formattedStart: string;
+  formattedEnd: string;
+}
+
 export const SchedulingDetails: FC = () => {
   const navigation = useNavigation();
   const route = useRoute<SchedulingDetailsScreenRouteProp>();
   const theme = useTheme();
 
-  const handleFinishScheduling = () => {
-    navigation.navigate("SchedulingComplete");
+  const { car, dates } = route.params;
+
+  const [isScheduling, setIsScheduling] = useState(false);
+
+  const rentalPeriod: RentaPeriodProps = {
+    formattedStart: format(getPlatformDate(new Date(dates[0])), "dd/MM/yyyy"),
+    formattedEnd: format(
+      getPlatformDate(new Date(dates[dates.length - 1])),
+      "dd/MM/yyyy"
+    ),
+  };
+
+  const rentTotal = Number(dates.length * car.rent.price);
+
+  const handleFinishScheduling = async () => {
+    try {
+      setIsScheduling(true);
+
+      const { data: schedulesByCar } = await api.get<ScheduleByCarDTO>(
+        `/schedules_bycars/${car.id}`
+      );
+
+      const findUnavailableDate = dates.find((date) =>
+        schedulesByCar.unavailable_dates.includes(date)
+      );
+
+      if (findUnavailableDate) {
+        const formattedDate = format(
+          getPlatformDate(new Date(findUnavailableDate)),
+          "dd 'de' MMMM 'de' yyyy",
+          { locale: ptBR }
+        );
+        setIsScheduling(false);
+        Alert.alert(`O carro já está alugado para o dia ${formattedDate}.`);
+        return;
+      }
+
+      const newUnavailableDates = [
+        ...schedulesByCar.unavailable_dates,
+        ...dates,
+      ];
+
+      await api.put(`/schedules_bycars/${car.id}`, {
+        id: car.id,
+        unavailable_dates: newUnavailableDates,
+      });
+
+      navigation.navigate("SchedulingComplete");
+    } catch (error) {
+      console.log(error);
+      setIsScheduling(false);
+      Alert.alert("Ops, ocorreu um erro ao alugar o carro!");
+    }
   };
 
   return (
@@ -70,41 +129,33 @@ export const SchedulingDetails: FC = () => {
 
       <CarImagesContainer>
         <CarImagesContent>
-          <ImagesSlider
-            urls={[
-              "https://catalogo.webmotors.com.br/imagens/prod/348415/AUDI_RS5_2.9_V6_TFSI_GASOLINA_SPORTBACK_QUATTRO_STRONIC_34841521101233346.png?s=fill&w=275&h=183&q=70&t=true",
-            ]}
-          />
+          <ImagesSlider urls={car.photos} />
         </CarImagesContent>
       </CarImagesContainer>
 
       <Content>
         <Details>
           <Description>
-            <Brand>Audi</Brand>
+            <Brand>{car.brand}</Brand>
 
-            <Name>RS 5 Coupé</Name>
+            <Name>{car.name}</Name>
           </Description>
 
           <Rent>
-            <Period>Ao dia</Period>
+            <Period>{car.rent.period}</Period>
 
-            <Price>R$ 120</Price>
+            <Price>{`R$ ${car.rent.price}`}</Price>
           </Rent>
         </Details>
 
         <Acessories>
-          <Accessory name="380Km/h" icon={SpeedSVG} />
-
-          <Accessory name="3.2s" icon={AccelerationSVG} />
-
-          <Accessory name="800 HP" icon={ForceSVG} />
-
-          <Accessory name="Gasolina" icon={GasolineSVG} />
-
-          <Accessory name="Auto" icon={ExchangeSVG} />
-
-          <Accessory name="2 Pessoas" icon={PeopleSVG} />
+          {car.accessories.map((accesory) => (
+            <Accessory
+              key={accesory.type}
+              name={accesory.name}
+              icon={getAccessoryIcon(accesory.type)}
+            />
+          ))}
         </Acessories>
 
         <RentalPeriod>
@@ -119,7 +170,7 @@ export const SchedulingDetails: FC = () => {
           <DateInfo>
             <DateTitle>DE</DateTitle>
 
-            <DateValue>18/06/2021</DateValue>
+            <DateValue>{rentalPeriod.formattedStart}</DateValue>
           </DateInfo>
 
           <Feather
@@ -131,7 +182,7 @@ export const SchedulingDetails: FC = () => {
           <DateInfo>
             <DateTitle>ATÉ</DateTitle>
 
-            <DateValue>18/06/2021</DateValue>
+            <DateValue>{rentalPeriod.formattedEnd}</DateValue>
           </DateInfo>
         </RentalPeriod>
 
@@ -139,10 +190,12 @@ export const SchedulingDetails: FC = () => {
           <RentalPriceQuota>
             <RentalPriceQuotaTitle>Total</RentalPriceQuotaTitle>
 
-            <RentalPriceQuotaValue>R$ 5080 x3 diárias</RentalPriceQuotaValue>
+            <RentalPriceQuotaValue>{`R$ ${car.rent.price} x${dates.length} ${
+              dates.length === 1 ? "diária" : "diárias"
+            }`}</RentalPriceQuotaValue>
           </RentalPriceQuota>
 
-          <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
+          <RentalPriceTotal>{`R$ ${rentTotal}`}</RentalPriceTotal>
         </RentalPrice>
       </Content>
 
@@ -151,6 +204,7 @@ export const SchedulingDetails: FC = () => {
           title="Alugar agora"
           color="success"
           onPress={handleFinishScheduling}
+          isLoading={isScheduling}
         />
       </Footer>
     </Container>

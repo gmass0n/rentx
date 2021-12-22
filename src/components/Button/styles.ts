@@ -6,6 +6,7 @@ import { theme } from "../../styles/theme";
 
 interface ContainerProps {
   color: ThemeColorsKey;
+  isDisabled: boolean;
 }
 
 export const Container = styled(RectButton)<ContainerProps>`
@@ -15,6 +16,8 @@ export const Container = styled(RectButton)<ContainerProps>`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme, color }) => theme.colors[color]};
+
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
 `;
 
 export const Title = styled.Text`
