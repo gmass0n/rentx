@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { StatusBar } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import SpeedSVG from "../../assets/speed.svg";
 import AccelerationSVG from "../../assets/acceleration.svg";
@@ -32,11 +34,23 @@ import {
 } from "./styles";
 
 export const CarDetails: FC = () => {
+  const navigation = useNavigation();
+
+  const handleNavigateToScheduling = () => {
+    navigation.navigate("Scheduling");
+  };
+
   return (
     <Container>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
       <Header>
         <HeaderContent>
-          <BackButton onPress={() => null} />
+          <BackButton />
         </HeaderContent>
       </Header>
 
@@ -86,7 +100,10 @@ export const CarDetails: FC = () => {
       </Content>
 
       <Footer>
-        <Button title="Escolher período do aluguel" />
+        <Button
+          title="Escolher período do aluguel"
+          onPress={handleNavigateToScheduling}
+        />
       </Footer>
     </Container>
   );

@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "react-native";
 
 import ArrowSVG from "../../assets/arrow.svg";
@@ -21,6 +22,12 @@ import {
 } from "./styles";
 
 export const Scheduling: FC = () => {
+  const navigation = useNavigation();
+
+  const handleNavigateToSchedulingDetails = () => {
+    navigation.navigate("SchedulingDetails");
+  };
+
   return (
     <Container>
       <StatusBar
@@ -31,7 +38,7 @@ export const Scheduling: FC = () => {
 
       <Header>
         <HeaderContent>
-          <BackButton onPress={() => null} color="shape" />
+          <BackButton color="shape" />
 
           <Title>
             Escolha uma{"\n"}
@@ -62,7 +69,7 @@ export const Scheduling: FC = () => {
       </Content>
 
       <Footer>
-        <Button title="Continuar" />
+        <Button title="Continuar" onPress={handleNavigateToSchedulingDetails} />
       </Footer>
     </Container>
   );

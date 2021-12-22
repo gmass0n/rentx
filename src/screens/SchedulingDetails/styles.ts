@@ -10,6 +10,7 @@ export const Container = styled.View`
 
 export const Header = styled.SafeAreaView`
   position: absolute;
+  z-index: 5;
 `;
 
 export const HeaderContent = styled.View`

@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { FlatList } from "react-native";
+import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
   flex: 1;
@@ -31,7 +32,10 @@ export const CarsTotal = styled.Text`
 `;
 
 export const CarsList = styled(FlatList).attrs({
-  contentContainerStyle: { padding: RFValue(24) },
+  contentContainerStyle: {
+    padding: RFValue(24),
+    paddingBottom: isIphoneX() ? getBottomSpace() : RFValue(24),
+  },
   showsVerticalScrollIndicator: false,
 })``;
 

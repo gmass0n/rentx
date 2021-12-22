@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
+import { useNavigation } from "@react-navigation/native";
 
 import SpeedSVG from "../../assets/speed.svg";
 import AccelerationSVG from "../../assets/acceleration.svg";
@@ -44,13 +45,18 @@ import {
 } from "./styles";
 
 export const SchedulingDetails: FC = () => {
+  const navigation = useNavigation();
   const theme = useTheme();
+
+  const handleFinishScheduling = () => {
+    navigation.navigate("SchedulingComplete");
+  };
 
   return (
     <Container>
       <Header>
         <HeaderContent>
-          <BackButton onPress={() => null} />
+          <BackButton />
         </HeaderContent>
       </Header>
 
@@ -133,7 +139,11 @@ export const SchedulingDetails: FC = () => {
       </Content>
 
       <Footer>
-        <Button title="Alugar agora" color="success" />
+        <Button
+          title="Alugar agora"
+          color="success"
+          onPress={handleFinishScheduling}
+        />
       </Footer>
     </Container>
   );

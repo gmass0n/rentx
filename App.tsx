@@ -14,13 +14,8 @@ import {
 } from "@expo-google-fonts/archivo";
 import { ThemeProvider } from "styled-components";
 
-import { Home } from "./src/screens/Home";
-import { CarDetails } from "./src/screens/CarDetails";
-import { Scheduling } from "./src/screens/Scheduling";
-import { SchedulingDetails } from "./src/screens/SchedulingDetails";
-import { SchedulingComplete } from "./src/screens/SchedulingComplete";
-
 import { theme } from "./src/styles/theme";
+import { Routes } from "./src/routes";
 
 export const App: FC = () => {
   const [isFontsLoaded] = useFonts({
@@ -35,11 +30,7 @@ export const App: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <Home /> */}
-      {/* <CarDetails /> */}
-      {/* <Scheduling /> */}
-      {/* <SchedulingDetails /> */}
-      <SchedulingComplete />
+      <Routes />
     </ThemeProvider>
   );
 };

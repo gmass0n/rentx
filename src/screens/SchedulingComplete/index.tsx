@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { StatusBar, useWindowDimensions } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useNavigation } from "@react-navigation/native";
 
 import LogoSVG from "../../assets/logo_background_gray.svg";
 import DoneSVG from "../../assets/done.svg";
@@ -19,7 +20,12 @@ import {
 } from "./styles";
 
 export const SchedulingComplete: FC = () => {
+  const navigation = useNavigation();
   const { width } = useWindowDimensions();
+
+  const handleNavigateToHome = () => {
+    navigation.navigate("Home");
+  };
 
   return (
     <Container>
@@ -48,7 +54,7 @@ export const SchedulingComplete: FC = () => {
 
         <Footer>
           <FooterContent>
-            <ConfirmButton title="OK" />
+            <ConfirmButton title="OK" onPress={handleNavigateToHome} />
           </FooterContent>
         </Footer>
       </ContentWrapper>
