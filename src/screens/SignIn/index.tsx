@@ -1,9 +1,11 @@
 import { FC } from "react";
 import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { Button } from "../../components/Button";
 
-import { Container, Header, Title, Subtitle, Footer } from "./styles";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+
+import { Container, Header, Title, Subtitle, Form, Footer } from "./styles";
 
 export const SignIn: FC = () => {
   return (
@@ -25,6 +27,18 @@ export const SignIn: FC = () => {
           uma experiência incrível.
         </Subtitle>
       </Header>
+
+      <Form>
+        <Input
+          icon="mail"
+          placeholder="Digite seu e-mail"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          containerStyle={{ marginBottom: RFValue(8) }}
+        />
+
+        <Input icon="lock" placeholder="Digite sua senha" secureTextEntry />
+      </Form>
 
       <Footer>
         <Button

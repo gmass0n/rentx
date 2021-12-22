@@ -13,8 +13,6 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-
-  margin-bottom: ${RFValue(24)}px;
 `;
 
 export const Title = styled.Text`
@@ -31,6 +29,12 @@ export const Subtitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_600};
   font-size: ${RFValue(14)}px;
   line-height: ${RFValue(20)}px;
+`;
+
+export const Form = styled.View`
+  width: 100%;
+
+  margin: ${RFValue(24)}px 0;
 `;
 
 export const Footer = styled.View`

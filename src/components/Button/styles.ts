@@ -15,7 +15,8 @@ interface TitleProps {
 
 export const Container = styled(RectButton)<ContainerProps>`
   width: 100%;
-  padding: ${RFValue(18)}px;
+  height: ${RFValue(48)}px;
+  padding: 0 ${RFValue(18)}px;
 
   align-items: center;
   justify-content: center;
