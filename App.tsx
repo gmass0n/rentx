@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import { FC } from "react";
 import AppLoading from "expo-app-loading";
 import {
@@ -13,6 +15,7 @@ import {
 import { ThemeProvider } from "styled-components";
 
 import { Home } from "./src/screens/Home";
+import { CarDetails } from "./src/screens/CarDetails";
 
 import { theme } from "./src/styles/theme";
 
@@ -29,7 +32,8 @@ export const App: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      {/* <Home /> */}
+      <CarDetails />
     </ThemeProvider>
   );
 };
