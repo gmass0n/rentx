@@ -7,7 +7,9 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background_secondary};
 `;
 
-export const Header = styled.SafeAreaView``;
+export const Header = styled.SafeAreaView`
+  position: absolute;
+`;
 
 export const HeaderContent = styled.View`
   flex-direction: row;
@@ -15,4 +17,10 @@ export const HeaderContent = styled.View`
   align-items: center;
 
   padding: ${RFValue(24)}px;
+`;
+
+export const CarImagesContainer = styled.SafeAreaView``;
+
+export const CarImagesContent = styled.View`
+  margin-top: ${RFValue(32)}px;
 `;
