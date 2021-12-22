@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { BorderlessButtonProps } from "react-native-gesture-handler";
 import { ThemeColorsKey, useTheme } from "styled-components";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -18,11 +18,7 @@ export const BackButton: FC<BackButtonProps> = ({
 
   return (
     <Container {...rest}>
-      <MaterialIcons
-        name="chevron-left"
-        size={RFValue(24)}
-        color={colors[color]}
-      />
+      <Feather name="chevron-left" size={RFValue(20)} color={colors[color]} />
     </Container>
   );
 };

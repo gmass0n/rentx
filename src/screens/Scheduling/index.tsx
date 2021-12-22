@@ -5,6 +5,7 @@ import ArrowSVG from "../../assets/arrow.svg";
 
 import { BackButton } from "../../components/BackButton";
 import { Button } from "../../components/Button";
+import { Calendar } from "../../components/Calendar";
 
 import {
   Container,
@@ -56,10 +57,12 @@ export const Scheduling: FC = () => {
         </HeaderContent>
       </Header>
 
-      <Content></Content>
+      <Content>
+        <Calendar />
+      </Content>
 
       <Footer>
-        <Button title="Continuar"></Button>
+        <Button title="Continuar" />
       </Footer>
     </Container>
   );

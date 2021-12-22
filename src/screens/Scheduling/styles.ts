@@ -75,6 +75,5 @@ export const Content = styled.ScrollView.attrs({
 })``;
 
 export const Footer = styled.View`
-  padding: ${RFValue(24)}px ${RFValue(24)}px
-    ${isIphoneX() ? getBottomSpace() : RFValue(24)}px;
+  padding: 0 ${RFValue(24)}px ${isIphoneX() ? getBottomSpace() : RFValue(24)}px;
 `;
