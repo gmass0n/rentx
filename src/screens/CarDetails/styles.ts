@@ -74,7 +74,7 @@ export const Price = styled.Text`
   font-size: ${RFValue(20)}px;
 `;
 
-export const Acessories = styled.View`
+export const Accessories = styled.View`
   width: 100%;
   margin-top: ${RFValue(24)}px;
 

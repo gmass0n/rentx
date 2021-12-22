@@ -13,7 +13,7 @@ import PeopleSVG from "../../assets/people.svg";
 
 import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
-import { Acessory } from "../../components/Acessory";
+import { Accessory } from "../../components/Accessory";
 import { Button } from "../../components/Button";
 
 import {
@@ -86,17 +86,17 @@ export const SchedulingDetails: FC = () => {
         </Details>
 
         <Acessories>
-          <Acessory name="380Km/h" icon={SpeedSVG} />
+          <Accessory name="380Km/h" icon={SpeedSVG} />
 
-          <Acessory name="3.2s" icon={AccelerationSVG} />
+          <Accessory name="3.2s" icon={AccelerationSVG} />
 
-          <Acessory name="800 HP" icon={ForceSVG} />
+          <Accessory name="800 HP" icon={ForceSVG} />
 
-          <Acessory name="Gasolina" icon={GasolineSVG} />
+          <Accessory name="Gasolina" icon={GasolineSVG} />
 
-          <Acessory name="Auto" icon={ExchangeSVG} />
+          <Accessory name="Auto" icon={ExchangeSVG} />
 
-          <Acessory name="2 Pessoas" icon={PeopleSVG} />
+          <Accessory name="2 Pessoas" icon={PeopleSVG} />
         </Acessories>
 
         <RentalPeriod>

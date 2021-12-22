@@ -41,8 +41,8 @@ export const Home: FC = () => {
     })();
   }, []);
 
-  const handleNavigateToCarDetails = () => {
-    navigation.navigate("CarDetails");
+  const handleNavigateToCarDetails = (car: CarDTO) => {
+    navigation.navigate("CarDetails", { car });
   };
 
   return (
@@ -68,7 +68,7 @@ export const Home: FC = () => {
           data={cars}
           keyExtractor={(car) => car.id}
           renderItem={({ item: car }) => (
-            <Car data={car} onPress={handleNavigateToCarDetails} />
+            <Car data={car} onPress={() => handleNavigateToCarDetails(car)} />
           )}
           ItemSeparatorComponent={CarsListSeparator}
         />

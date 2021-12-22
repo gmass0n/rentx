@@ -4,12 +4,12 @@ import { SvgProps } from "react-native-svg";
 
 import { Container, Name } from "./styles";
 
-interface AcessoryProps {
+interface AccessoryProps {
   name: string;
   icon: FC<SvgProps>;
 }
 
-export const Acessory: FC<AcessoryProps> = ({ name, icon: Icon }) => {
+export const Accessory: FC<AccessoryProps> = ({ name, icon: Icon }) => {
   return (
     <Container>
       <Icon width={RFValue(32)} height={RFValue(32)} />

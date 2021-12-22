@@ -1,15 +1,14 @@
 import { CarAccessoryDTO } from "./CarAccessoryDTO";
+import { CarRentDTO } from "./CarRentDTO";
 
 export interface CarDTO {
   id: string;
   brand: string;
   name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
+  rent: CarRentDTO;
+  about: string;
   picture: string;
-  accesories: CarAccessoryDTO[];
-  photo: string;
+  accessories: CarAccessoryDTO[];
+  photos: string[];
   fuel_type: string;
 }
