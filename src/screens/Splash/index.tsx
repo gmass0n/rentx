@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { FC, useEffect } from "react";
 import { StatusBar } from "react-native";
 import Animated, {
@@ -6,6 +7,7 @@ import Animated, {
   interpolate,
   withTiming,
   Extrapolate,
+  runOnJS,
 } from "react-native-reanimated";
 
 import BrandSVG from "../../assets/brand.svg";
@@ -15,7 +17,7 @@ import { Container } from "./styles";
 
 export const Splash: FC = () => {
   const splashAnimation = useSharedValue(0);
-  const splashAnimation2 = useSharedValue(0);
+  const navigation = useNavigation();
 
   const brandStyle = useAnimatedStyle(() => ({
     opacity: interpolate(splashAnimation.value, [0, 50], [1, 0]),
@@ -42,8 +44,17 @@ export const Splash: FC = () => {
     position: "absolute",
   }));
 
+  const startApp = () => {
+    navigation.navigate("Home");
+  };
+
   useEffect(() => {
-    splashAnimation.value = withTiming(50, { duration: 1000 });
+    splashAnimation.value = withTiming(50, { duration: 1000 }, (isFinished) => {
+      if (isFinished) {
+        ("worklet");
+        runOnJS(startApp)();
+      }
+    });
   }, []);
 
   return (
