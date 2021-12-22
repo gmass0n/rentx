@@ -1,4 +1,11 @@
-import React, { FC } from "react";
+import { FC } from "react";
+
+import SpeedSVG from "../../assets/speed.svg";
+import AccelerationSVG from "../../assets/acceleration.svg";
+import ForceSVG from "../../assets/force.svg";
+import GasolineSVG from "../../assets/gasoline.svg";
+import ExchangeSVG from "../../assets/exchange.svg";
+import PeopleSVG from "../../assets/people.svg";
 
 import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
@@ -17,8 +24,10 @@ import {
   Rent,
   Period,
   Price,
+  Acessories,
   About,
 } from "./styles";
+import { Acessory } from "../../components/Acessory";
 
 export const CarDetails: FC = () => {
   return (
@@ -53,6 +62,20 @@ export const CarDetails: FC = () => {
             <Price>R$ 120</Price>
           </Rent>
         </Details>
+
+        <Acessories>
+          <Acessory name="380Km/h" icon={SpeedSVG} />
+
+          <Acessory name="3.2s" icon={AccelerationSVG} />
+
+          <Acessory name="800 HP" icon={ForceSVG} />
+
+          <Acessory name="Gasolina" icon={GasolineSVG} />
+
+          <Acessory name="Auto" icon={ExchangeSVG} />
+
+          <Acessory name="2 Pessoas" icon={PeopleSVG} />
+        </Acessories>
 
         <About>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt quod

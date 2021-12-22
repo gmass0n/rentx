@@ -72,11 +72,21 @@ export const Price = styled.Text`
   font-size: ${RFValue(20)}px;
 `;
 
+export const Acessories = styled.View`
+  width: 100%;
+  margin-top: ${RFValue(24)}px;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const About = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   color: ${({ theme }) => theme.colors.text};
   font-size: ${RFValue(14)}px;
-  line-height: ${RFValue(20)}px;
+  line-height: ${RFValue(24)}px;
 
   text-align: justify;
 
