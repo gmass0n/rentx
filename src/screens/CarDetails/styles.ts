@@ -95,7 +95,6 @@ export const About = styled.Text`
 `;
 
 export const Footer = styled.View`
-  width: 100%;
   padding: ${RFValue(24)}px ${RFValue(24)}px
     ${isIphoneX() ? getBottomSpace() : RFValue(24)}px;
 `;
