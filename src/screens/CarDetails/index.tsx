@@ -4,13 +4,6 @@ import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 
 import { DefaultStackParamList } from "../../routes/DefaultStack";
 
-import SpeedSVG from "../../assets/speed.svg";
-import AccelerationSVG from "../../assets/acceleration.svg";
-import ForceSVG from "../../assets/force.svg";
-import GasolineSVG from "../../assets/gasoline.svg";
-import ExchangeSVG from "../../assets/exchange.svg";
-import PeopleSVG from "../../assets/people.svg";
-
 import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
 import { Accessory } from "../../components/Accessory";
@@ -34,6 +27,7 @@ import {
   About,
   Footer,
 } from "./styles";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 type CarDetailsScreenRouteProp = RouteProp<DefaultStackParamList, "CarDetails">;
 
@@ -87,7 +81,7 @@ export const CarDetails: FC = () => {
             <Accessory
               key={accesory.type}
               name={accesory.name}
-              icon={SpeedSVG}
+              icon={getAccessoryIcon(accesory.type)}
             />
           ))}
         </Accessories>
