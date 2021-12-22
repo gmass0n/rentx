@@ -22,7 +22,7 @@ export const ImageIndexes = styled.View`
 export const ImageIndex = styled.View<ImageIndexProps>`
   width: ${RFValue(8)}px;
   height: ${RFValue(8)}px;
-  border-radius: ${RFValue(8)}px;
+  border-radius: ${RFValue(4)}px;
 
   background-color: ${({ theme, isActive }) =>
     isActive ? theme.colors.title : theme.colors.shape};
