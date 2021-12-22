@@ -1,5 +1,3 @@
-import "react-native-gesture-handler";
-
 import { FC } from "react";
 import AppLoading from "expo-app-loading";
 import {
