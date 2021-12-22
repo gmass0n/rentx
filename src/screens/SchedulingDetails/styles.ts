@@ -28,7 +28,11 @@ export const CarImagesContent = styled.View`
 `;
 
 export const Content = styled.ScrollView.attrs({
-  contentContainerStyle: { padding: RFValue(24), alignItems: "center" },
+  contentContainerStyle: {
+    padding: RFValue(24),
+    paddingBottom: 0,
+    alignItems: "center",
+  },
   showsVerticalScrollIndicator: false,
 })``;
 

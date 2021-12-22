@@ -4,6 +4,7 @@ import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
+import { PanGestureHandler } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -19,7 +20,7 @@ import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 
 import { Car } from "../../components/Car";
-import { Spinner } from "../../components/Spinner";
+import { AnimatedLoading } from "../../components/AnimatedLoading";
 
 import {
   Container,
@@ -30,9 +31,9 @@ import {
   CarsListSeparator,
   MyCarsButton,
 } from "./styles";
-import { PanGestureHandler } from "react-native-gesture-handler";
 
 const AnimatedMyCarsButton = Animated.createAnimatedComponent(MyCarsButton);
+const AnimatedCarsList = Animated.createAnimatedComponent(CarsList);
 
 export const Home: FC = () => {
   const navigation = useNavigation();
@@ -40,7 +41,7 @@ export const Home: FC = () => {
 
   const positionY = useSharedValue(0);
   const positionX = useSharedValue(0);
-  const carsTotalOpacity = useSharedValue(0);
+  const animatedOpacity = useSharedValue(0);
 
   const myCarsButtonStyle = useAnimatedStyle(() => ({
     transform: [
@@ -53,8 +54,8 @@ export const Home: FC = () => {
     ],
   }));
 
-  const carsTotalStyle = useAnimatedStyle(() => ({
-    opacity: carsTotalOpacity.value,
+  const withOpacityStyle = useAnimatedStyle(() => ({
+    opacity: animatedOpacity.value,
   }));
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -96,7 +97,7 @@ export const Home: FC = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      carsTotalOpacity.value = withTiming(1, { duration: 300 });
+      animatedOpacity.value = withTiming(1, { duration: 500 });
     }
   }, [isLoading]);
 
@@ -120,16 +121,17 @@ export const Home: FC = () => {
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
 
-          <CarsTotal style={carsTotalStyle}>
+          <CarsTotal style={withOpacityStyle}>
             Total de {cars.length} carros
           </CarsTotal>
         </HeaderContent>
       </Header>
 
       {isLoading ? (
-        <Spinner />
+        <AnimatedLoading />
       ) : (
-        <CarsList
+        <AnimatedCarsList
+          style={withOpacityStyle}
           data={cars}
           keyExtractor={(car) => car.id}
           renderItem={({ item: car }) => (

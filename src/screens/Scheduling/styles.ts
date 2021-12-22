@@ -26,8 +26,8 @@ export const HeaderContent = styled.View`
 export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
   font-family: ${({ theme }) => theme.fonts.secondary_600};
-  font-size: ${RFValue(32)}px;
-  line-height: ${RFValue(44)}px;
+  font-size: ${RFValue(30)}px;
+  line-height: ${RFValue(42)}px;
 
   margin-top: ${RFValue(24)}px;
 `;

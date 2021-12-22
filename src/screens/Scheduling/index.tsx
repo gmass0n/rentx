@@ -3,6 +3,14 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar } from "react-native";
 import { format, isToday } from "date-fns";
 import { DateData } from "react-native-calendars/src/types";
+import { useTheme } from "styled-components";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+
+import { api } from "../../services/api";
 
 import ArrowSVG from "../../assets/arrow.svg";
 
@@ -12,8 +20,11 @@ import { getPlatformDate } from "../../utils/getPlatformDate";
 import { BackButton } from "../../components/BackButton";
 import { Button } from "../../components/Button";
 import { Calendar, MarkedDateProps } from "../../components/Calendar";
+import { AnimatedLoading } from "../../components/AnimatedLoading";
 
 import { DefaultStackParamList } from "../../routes/DefaultStack";
+
+import { ScheduleByCarDTO } from "../../dtos/ScheduleByCarDTO";
 
 import {
   Container,
@@ -27,10 +38,6 @@ import {
   Content,
   Footer,
 } from "./styles";
-import { api } from "../../services/api";
-import { ScheduleByCarDTO } from "../../dtos/ScheduleByCarDTO";
-import { useTheme } from "styled-components";
-import { Spinner } from "../../components/Spinner";
 
 type SchedulingScreenRouteProp = RouteProp<DefaultStackParamList, "Scheduling">;
 
@@ -45,6 +52,12 @@ export const Scheduling: FC = () => {
   const route = useRoute<SchedulingScreenRouteProp>();
 
   const { car } = route.params;
+
+  const animatedOpacity = useSharedValue(0);
+
+  const withOpacityStyle = useAnimatedStyle(() => ({
+    opacity: animatedOpacity.value,
+  }));
 
   const lastSelectedDate = useRef({} as DateData);
 
@@ -84,6 +97,12 @@ export const Scheduling: FC = () => {
       }
     })();
   }, [car]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      animatedOpacity.value = withTiming(1, { duration: 500 });
+    }
+  }, [isLoading]);
 
   const handleNavigateToSchedulingDetails = () => {
     navigation.navigate("SchedulingDetails", {
@@ -157,12 +176,14 @@ export const Scheduling: FC = () => {
 
       <Content>
         {isLoading ? (
-          <Spinner />
+          <AnimatedLoading />
         ) : (
-          <Calendar
-            markedDates={{ ...markedDates, ...disabledDates }}
-            onDayPress={handleChangeDate}
-          />
+          <Animated.View style={withOpacityStyle}>
+            <Calendar
+              markedDates={{ ...markedDates, ...disabledDates }}
+              onDayPress={handleChangeDate}
+            />
+          </Animated.View>
         )}
       </Content>
 

@@ -1,9 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import { StatusBar } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
+import { AnimatedLoading } from "../../components/AnimatedLoading";
 import { BackButton } from "../../components/BackButton";
 import { Car } from "../../components/Car";
-import { Spinner } from "../../components/Spinner";
 
 import { ScheduleByUserDTO } from "../../dtos/ScheduleByUserDTO";
 
@@ -30,6 +35,12 @@ import {
 } from "./styles";
 
 export const MyCars: FC = () => {
+  const animatedOpacity = useSharedValue(0);
+
+  const withOpacityStyle = useAnimatedStyle(() => ({
+    opacity: animatedOpacity.value,
+  }));
+
   const [appointments, setAppointments] = useState<ScheduleByUserDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -49,6 +60,12 @@ export const MyCars: FC = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    if (!isLoading) {
+      animatedOpacity.value = withTiming(1, { duration: 500 });
+    }
+  }, [isLoading]);
+
   return (
     <Container>
       <StatusBar
@@ -62,9 +79,8 @@ export const MyCars: FC = () => {
           <BackButton color="shape" />
 
           <Title>
-            Escolha uma{"\n"}
-            data de início e{"\n"}
-            fim do aluguel
+            Seus agendamentos,{"\n"}
+            estão aqui
           </Title>
 
           <Subtitle>Conforto, segurança e praticidade.</Subtitle>
@@ -73,9 +89,14 @@ export const MyCars: FC = () => {
 
       <Content>
         {isLoading ? (
-          <Spinner />
+          <AnimatedLoading />
         ) : (
-          <>
+          <Animated.View
+            style={[
+              withOpacityStyle,
+              { width: "100%", flex: 1, alignItems: "center" },
+            ]}
+          >
             <AppointmentsHeader>
               <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
               <AppointmentsQuantity>{appointments.length}</AppointmentsQuantity>
@@ -103,7 +124,7 @@ export const MyCars: FC = () => {
               )}
               ItemSeparatorComponent={AppointmentsListSeparator}
             />
-          </>
+          </Animated.View>
         )}
       </Content>
     </Container>
