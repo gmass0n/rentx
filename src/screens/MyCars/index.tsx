@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { StatusBar } from "react-native";
+
 import { BackButton } from "../../components/BackButton";
 import { Car } from "../../components/Car";
 import { Spinner } from "../../components/Spinner";
 
-import { CarDTO } from "../../dtos/CarDTO";
 import { ScheduleByUserDTO } from "../../dtos/ScheduleByUserDTO";
+
 import { api } from "../../services/api";
 
 import {
@@ -20,6 +21,12 @@ import {
   AppointmentsQuantity,
   AppointmentsList,
   AppointmentsListSeparator,
+  CarWrapper,
+  CarFooter,
+  CarFooterTitle,
+  CarFooterPeriod,
+  CarFooterDate,
+  CarFooterArrow,
 } from "./styles";
 
 export const MyCars: FC = () => {
@@ -78,7 +85,21 @@ export const MyCars: FC = () => {
               data={appointments}
               keyExtractor={(appointment) => String(appointment.id)}
               renderItem={({ item: appointment }) => (
-                <Car data={appointment.car} />
+                <CarWrapper>
+                  <Car data={appointment.car} />
+
+                  <CarFooter>
+                    <CarFooterTitle>Período</CarFooterTitle>
+
+                    <CarFooterPeriod>
+                      <CarFooterDate>{appointment.startDate}</CarFooterDate>
+
+                      <CarFooterArrow />
+
+                      <CarFooterDate>{appointment.endDate}</CarFooterDate>
+                    </CarFooterPeriod>
+                  </CarFooter>
+                </CarWrapper>
               )}
               ItemSeparatorComponent={AppointmentsListSeparator}
             />

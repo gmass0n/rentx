@@ -3,7 +3,6 @@ import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const Container = styled(RectButton)`
-  max-width: 100%;
   width: 100%;
   height: ${RFValue(120)}px;
 
