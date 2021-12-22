@@ -9,6 +9,7 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedGestureHandler,
   withSpring,
+  withTiming,
 } from "react-native-reanimated";
 
 import Logo from "../../assets/logo.svg";
@@ -39,6 +40,7 @@ export const Home: FC = () => {
 
   const positionY = useSharedValue(0);
   const positionX = useSharedValue(0);
+  const carsTotalOpacity = useSharedValue(0);
 
   const myCarsButtonStyle = useAnimatedStyle(() => ({
     transform: [
@@ -49,6 +51,10 @@ export const Home: FC = () => {
         translateY: positionY.value,
       },
     ],
+  }));
+
+  const carsTotalStyle = useAnimatedStyle(() => ({
+    opacity: carsTotalOpacity.value,
   }));
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -88,6 +94,12 @@ export const Home: FC = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    if (!isLoading) {
+      carsTotalOpacity.value = withTiming(1, { duration: 300 });
+    }
+  }, [isLoading]);
+
   const handleNavigateToCarDetails = (car: CarDTO) => {
     navigation.navigate("CarDetails", { car });
   };
@@ -108,7 +120,9 @@ export const Home: FC = () => {
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
 
-          <CarsTotal>Total de {cars.length} carros</CarsTotal>
+          <CarsTotal style={carsTotalStyle}>
+            Total de {cars.length} carros
+          </CarsTotal>
         </HeaderContent>
       </Header>
 

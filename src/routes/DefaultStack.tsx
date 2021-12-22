@@ -29,7 +29,11 @@ export const DefaultStack: FC = () => {
     <Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
       <Screen name="Splash" component={Splash} />
 
-      <Screen name="Home" component={Home} />
+      <Screen
+        name="Home"
+        component={Home}
+        options={{ gestureEnabled: false }}
+      />
 
       <Screen name="CarDetails" component={CarDetails} />
 
@@ -37,7 +41,11 @@ export const DefaultStack: FC = () => {
 
       <Screen name="SchedulingDetails" component={SchedulingDetails} />
 
-      <Screen name="SchedulingComplete" component={SchedulingComplete} />
+      <Screen
+        name="SchedulingComplete"
+        component={SchedulingComplete}
+        options={{ gestureEnabled: false }}
+      />
 
       <Screen name="MyCars" component={MyCars} />
     </Navigator>

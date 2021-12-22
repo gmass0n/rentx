@@ -1,13 +1,10 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { FlatList } from "react-native";
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-  isIphoneX,
-} from "react-native-iphone-x-helper";
+import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
 import { ComponentType } from "react";
 import { RectButton } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
 
 import { CarDTO } from "../../dtos/CarDTO";
 
@@ -33,7 +30,7 @@ export const HeaderContent = styled.View`
   padding: ${RFValue(24)}px;
 `;
 
-export const CarsTotal = styled.Text`
+export const CarsTotal = styled(Animated.Text)`
   font-size: ${RFValue(14)}px;
   font-family: ${({ theme }) => theme.fonts.primary_400};
   color: ${({ theme }) => theme.colors.text};
