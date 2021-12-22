@@ -8,11 +8,13 @@ import { Spinner } from "../Spinner";
 interface ButtonProps extends RectButtonProps {
   title: string;
   color?: ThemeColorsKey;
+  textColor?: ThemeColorsKey;
   isLoading?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
   color = "main",
+  textColor = "shape",
   isLoading,
   enabled = true,
   title,
@@ -26,9 +28,9 @@ export const Button: FC<ButtonProps> = ({
       {...rest}
     >
       {isLoading ? (
-        <Spinner color="shape" size="small" style={{ flex: 0 }} />
+        <Spinner color={textColor} size="small" style={{ flex: 0 }} />
       ) : (
-        <Title>{title}</Title>
+        <Title color={textColor}>{title}</Title>
       )}
     </Container>
   );

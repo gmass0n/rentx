@@ -8,6 +8,7 @@ import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
+import { SignIn } from "../screens/SignIn";
 
 import { CarDTO } from "../dtos/CarDTO";
 
@@ -19,6 +20,7 @@ export type DefaultStackParamList = {
   SchedulingDetails: { car: CarDTO; dates: string[] };
   SchedulingComplete: undefined;
   MyCars: undefined;
+  SignIn: undefined;
 };
 
 const { Navigator, Screen } =
@@ -26,8 +28,10 @@ const { Navigator, Screen } =
 
 export const DefaultStack: FC = () => {
   return (
-    <Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+    <Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
       <Screen name="Splash" component={Splash} />
+
+      <Screen name="SignIn" component={SignIn} />
 
       <Screen
         name="Home"

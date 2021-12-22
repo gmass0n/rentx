@@ -80,7 +80,7 @@ export const MyCars: FC = () => {
 
           <Title>
             Seus agendamentos,{"\n"}
-            estão aqui
+            estão aqui.
           </Title>
 
           <Subtitle>Conforto, segurança e praticidade.</Subtitle>

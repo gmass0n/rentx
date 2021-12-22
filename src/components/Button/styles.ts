@@ -9,6 +9,10 @@ interface ContainerProps {
   isDisabled: boolean;
 }
 
+interface TitleProps {
+  color: ThemeColorsKey;
+}
+
 export const Container = styled(RectButton)<ContainerProps>`
   width: 100%;
   padding: ${RFValue(18)}px;
@@ -20,8 +24,8 @@ export const Container = styled(RectButton)<ContainerProps>`
   opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
 `;
 
-export const Title = styled.Text`
+export const Title = styled.Text<TitleProps>`
   font-family: ${({ theme }) => theme.fonts.primary_500};
   font-size: ${RFValue(14)}px;
-  color: ${({ theme }) => theme.colors.shape};
+  color: ${({ theme, color }) => theme.colors[color]};
 `;

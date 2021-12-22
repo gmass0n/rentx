@@ -45,7 +45,7 @@ export const CarsList = styled(FlatList as new () => FlatList<CarDTO>).attrs({
 })`` as ComponentType as new () => FlatList<CarDTO>;
 
 export const CarsListSeparator = styled.View`
-  margin-top: ${RFValue(12)}px;
+  margin-top: ${RFValue(8)}px;
 `;
 
 export const MyCarsButton = styled(RectButton)`

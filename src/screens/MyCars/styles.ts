@@ -28,7 +28,7 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
   font-family: ${({ theme }) => theme.fonts.secondary_600};
   font-size: ${RFValue(30)}px;
-  line-height: ${RFValue(42)}px;
+  line-height: ${RFValue(36)}px;
 
   margin-top: ${RFValue(24)}px;
 `;
@@ -78,7 +78,7 @@ export const AppointmentsList = styled(
 })`` as ComponentType as new () => FlatList<ScheduleByUserDTO>;
 
 export const AppointmentsListSeparator = styled.View`
-  margin-top: ${RFValue(12)}px;
+  margin-top: ${RFValue(8)}px;
 `;
 
 export const CarWrapper = styled.View`
