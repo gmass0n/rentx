@@ -111,7 +111,10 @@ export const SchedulingDetails: FC = () => {
         unavailable_dates: newUnavailableDates,
       });
 
-      navigation.navigate("SchedulingComplete");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "SchedulingComplete" }],
+      });
     } catch (error) {
       console.log(error);
       setIsScheduling(false);
