@@ -10,7 +10,7 @@
         "price": 120
       },
       "fuel_type": "electric",
-      "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
+      "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
       "accessories": [
         {
           "type": "speed",
@@ -53,7 +53,7 @@
         "price": 340
       },
       "fuel_type": "gasoline_motor",
-      "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+      "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
       "accessories": [
         {
           "type": "speed",
@@ -95,7 +95,7 @@
         "price": 620
       },
       "fuel_type": "gasoline_motor",
-      "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/3.png",
+      "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/3.png",
       "accessories": [
         {
           "type": "speed",
@@ -138,7 +138,7 @@
         "price": 120
       },
       "fuel_type": "electric_motor",
-      "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/4.png",
+      "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/4.png",
       "accessories": [
         {
           "type": "speed",
@@ -181,7 +181,7 @@
         "price": 120
       },
       "fuel_type": "gasoline_motor",
-      "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
+      "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
       "accessories": [
         {
           "type": "speed",
@@ -224,7 +224,7 @@
         "price": 220
       },
       "fuel_type": "hybrid_motor",
-      "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/6.png",
+      "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/6.png",
       "accessories": [
         {
           "type": "speed",
@@ -359,7 +359,7 @@
           "price": 120
         },
         "fuel_type": "electric",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
             "type": "speed",
@@ -408,7 +408,7 @@
           "price": 620
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/3.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/3.png",
         "accessories": [
           {
             "type": "speed",
@@ -457,7 +457,7 @@
           "price": 120
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
             "type": "speed",
@@ -506,7 +506,7 @@
           "price": 120
         },
         "fuel_type": "electric",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
             "type": "speed",
@@ -555,7 +555,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -603,7 +603,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -651,7 +651,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -699,7 +699,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -747,7 +747,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -795,7 +795,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -843,7 +843,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -891,7 +891,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -939,7 +939,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -987,7 +987,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -1035,7 +1035,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -1083,7 +1083,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -1131,7 +1131,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -1179,7 +1179,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -1227,7 +1227,7 @@
           "price": 340
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
             "type": "speed",
@@ -1275,7 +1275,7 @@
           "price": 620
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/3.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/3.png",
         "accessories": [
           {
             "type": "speed",
@@ -1324,7 +1324,7 @@
           "price": 120
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
             "type": "speed",
@@ -1373,7 +1373,7 @@
           "price": 120
         },
         "fuel_type": "gasoline_motor",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
             "type": "speed",
@@ -1422,7 +1422,7 @@
           "price": 120
         },
         "fuel_type": "electric",
-        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
+        "picture": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
             "type": "speed",
