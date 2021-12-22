@@ -35,7 +35,7 @@ export const SchedulingComplete: FC = () => {
 
       <ContentWrapper>
         <Content>
-          <DoneSVG width={RFValue(65)} height={RFValue(65)} />
+          <DoneSVG width={RFValue(70)} height={RFValue(70)} />
 
           <Title>Carro alugado</Title>
 
