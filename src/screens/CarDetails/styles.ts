@@ -1,5 +1,6 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
+import { isIphoneX, getBottomSpace } from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
   flex: 1;
@@ -91,4 +92,10 @@ export const About = styled.Text`
   text-align: justify;
 
   margin-top: ${RFValue(24)}px;
+`;
+
+export const Footer = styled.View`
+  width: 100%;
+  padding: ${RFValue(24)}px ${RFValue(24)}px
+    ${isIphoneX() ? getBottomSpace() : RFValue(24)}px;
 `;

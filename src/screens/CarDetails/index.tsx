@@ -9,6 +9,8 @@ import PeopleSVG from "../../assets/people.svg";
 
 import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
+import { Acessory } from "../../components/Acessory";
+import { Button } from "../../components/Button";
 
 import {
   Container,
@@ -26,8 +28,8 @@ import {
   Price,
   Acessories,
   About,
+  Footer,
 } from "./styles";
-import { Acessory } from "../../components/Acessory";
 
 export const CarDetails: FC = () => {
   return (
@@ -82,6 +84,10 @@ export const CarDetails: FC = () => {
           sequi quisquam eos hic exercita tionem quisquam eos hic
         </About>
       </Content>
+
+      <Footer>
+        <Button title="Escolher período do aluguel" />
+      </Footer>
     </Container>
   );
 };
