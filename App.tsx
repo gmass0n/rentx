@@ -26,8 +26,6 @@ export const App: FC = () => {
     Archivo_600SemiBold,
   });
 
-  return <AppLoading />;
-
   if (!isFontsLoaded) return <AppLoading />;
 
   return (
