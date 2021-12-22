@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { StatusBar, Alert } from "react-native";
+import { StatusBar } from "react-native";
 import { format, isToday } from "date-fns";
 import { DateData } from "react-native-calendars/src/types";
 
@@ -86,11 +86,6 @@ export const Scheduling: FC = () => {
   }, [car]);
 
   const handleNavigateToSchedulingDetails = () => {
-    if (!rentalPeriod.formattedStart || !rentalPeriod.formattedEnd) {
-      Alert.alert("Selecione o data de início e fim do aluguel.");
-      return;
-    }
-
     navigation.navigate("SchedulingDetails", {
       car,
       dates: Object.keys(markedDates),
@@ -172,7 +167,11 @@ export const Scheduling: FC = () => {
       </Content>
 
       <Footer>
-        <Button title="Continuar" onPress={handleNavigateToSchedulingDetails} />
+        <Button
+          title="Continuar"
+          onPress={handleNavigateToSchedulingDetails}
+          enabled={!!rentalPeriod.formattedStart || !!rentalPeriod.formattedEnd}
+        />
       </Footer>
     </Container>
   );
