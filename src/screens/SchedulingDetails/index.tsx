@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
 import SpeedSVG from "../../assets/speed.svg";
 import AccelerationSVG from "../../assets/acceleration.svg";
@@ -15,6 +15,8 @@ import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
 import { Accessory } from "../../components/Accessory";
 import { Button } from "../../components/Button";
+
+import { DefaultStackParamList } from "../../routes/DefaultStack";
 
 import {
   Container,
@@ -44,8 +46,14 @@ import {
   Footer,
 } from "./styles";
 
+type SchedulingDetailsScreenRouteProp = RouteProp<
+  DefaultStackParamList,
+  "SchedulingDetails"
+>;
+
 export const SchedulingDetails: FC = () => {
   const navigation = useNavigation();
+  const route = useRoute<SchedulingDetailsScreenRouteProp>();
   const theme = useTheme();
 
   const handleFinishScheduling = () => {

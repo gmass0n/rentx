@@ -38,7 +38,7 @@ export const CarDetails: FC = () => {
   const { car } = route.params;
 
   const handleNavigateToScheduling = () => {
-    navigation.navigate("Scheduling");
+    navigation.navigate("Scheduling", { car });
   };
 
   return (
