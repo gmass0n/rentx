@@ -13,6 +13,7 @@ import * as Yup from "yup";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { useAuth } from "../../hooks/auth";
 
 import { Container, Header, Title, Subtitle, Form, Footer } from "./styles";
 
@@ -30,6 +31,7 @@ const formSchema = Yup.object().shape({
 
 export const SignIn: FC = () => {
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   const passwordInputRef = useRef<TextInput>(null);
 
@@ -49,6 +51,8 @@ export const SignIn: FC = () => {
       setIsSigning(true);
 
       await formSchema.validate(formData, { abortEarly: false });
+
+      await signIn(formData);
     } catch (error) {
       setIsSigning(false);
 

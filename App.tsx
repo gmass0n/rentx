@@ -10,10 +10,9 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold,
 } from "@expo-google-fonts/archivo";
-import { ThemeProvider } from "styled-components";
 
-import { theme } from "./src/styles/theme";
 import { Routes } from "./src/routes";
+import { AppProvider } from "./src/hooks";
 
 export const App: FC = () => {
   const [isFontsLoaded] = useFonts({
@@ -27,8 +26,8 @@ export const App: FC = () => {
   if (!isFontsLoaded) return <AppLoading />;
 
   return (
-    <ThemeProvider theme={theme}>
+    <AppProvider>
       <Routes />
-    </ThemeProvider>
+    </AppProvider>
   );
 };
