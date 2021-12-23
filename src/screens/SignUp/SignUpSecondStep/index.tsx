@@ -1,4 +1,4 @@
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { FC, useCallback, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -14,6 +14,7 @@ import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
+
 import { DefaultStackParamList } from "../../../routes/DefaultStack";
 
 import {
@@ -47,6 +48,7 @@ const formSchema = Yup.object().shape({
 });
 
 export const SignUpSecondStep: FC = () => {
+  const navigation = useNavigation();
   const route = useRoute<SignUpSecondStepScreenRouteProp>();
 
   const passwordConfirmationInputRef = useRef<TextInput>(null);
@@ -67,7 +69,11 @@ export const SignUpSecondStep: FC = () => {
       setIsSignuping(false);
       console.log(route.params.user);
 
-      // navigaton.navigate("SignUpSecondStep");
+      navigation.navigate("Confirmation", {
+        title: "Conta criada!",
+        message: `Agora é so entrar com a sua conta\ne aproveitar!`,
+        nextScreenRoute: "SignIn",
+      });
     } catch (error) {
       setIsSignuping(false);
 

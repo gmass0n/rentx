@@ -1,12 +1,14 @@
 import { FC } from "react";
 import { StatusBar, useWindowDimensions } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
 import LogoSVG from "../../assets/logo_background_gray.svg";
 import DoneSVG from "../../assets/done.svg";
 
 import { ConfirmButton } from "../../components/ConfirmButton";
+
+import { DefaultStackParamList } from "../../routes/DefaultStack";
 
 import {
   Container,
@@ -19,12 +21,20 @@ import {
   FooterContent,
 } from "./styles";
 
-export const SchedulingComplete: FC = () => {
+type ConfirmationScreenRouteProp = RouteProp<
+  DefaultStackParamList,
+  "Confirmation"
+>;
+
+export const Confirmation: FC = () => {
   const navigation = useNavigation();
+  const route = useRoute<ConfirmationScreenRouteProp>();
   const { width } = useWindowDimensions();
 
+  const { title, message, nextScreenRoute } = route.params;
+
   const handleNavigateToHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate(nextScreenRoute);
   };
 
   return (
@@ -43,13 +53,9 @@ export const SchedulingComplete: FC = () => {
         <Content>
           <DoneSVG width={RFValue(70)} height={RFValue(70)} />
 
-          <Title>Carro alugado</Title>
+          <Title>{title}</Title>
 
-          <Message>
-            Agora você só precisa ir{"\n"}
-            até a concessionária da RENTX{"\n"}
-            pegar o seu automóvel.
-          </Message>
+          <Message>{message}</Message>
         </Content>
 
         <Footer>

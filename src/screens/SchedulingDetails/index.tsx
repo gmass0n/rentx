@@ -113,7 +113,16 @@ export const SchedulingDetails: FC = () => {
 
       navigation.reset({
         index: 0,
-        routes: [{ name: "SchedulingComplete" }],
+        routes: [
+          {
+            name: "Confirmation",
+            params: {
+              title: "Carro alugado!",
+              message: `Agora você so precisa ir\naté a concessionária da RENTX\npegar o seu automóvel.`,
+              nextScreenRoute: "Home",
+            },
+          },
+        ],
       });
     } catch (error) {
       console.log(error);
