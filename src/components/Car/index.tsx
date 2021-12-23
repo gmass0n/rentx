@@ -2,6 +2,7 @@ import { FC } from "react";
 import { RectButtonProps } from "react-native-gesture-handler";
 
 import GasolineSVG from "../../assets/gasoline.svg";
+import { CarDTO } from "../../dtos/CarDTO";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 import {
@@ -17,19 +18,8 @@ import {
   Picture,
 } from "./styles";
 
-interface CarData {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
-  fuel_type: string;
-  picture: string;
-}
-
 interface CarProps extends RectButtonProps {
-  data: CarData;
+  data: CarDTO;
 }
 
 export const Car: FC<CarProps> = ({ data, ...rest }) => {
@@ -44,9 +34,9 @@ export const Car: FC<CarProps> = ({ data, ...rest }) => {
 
         <About>
           <Rent>
-            <Period>{data.rent.period}</Period>
+            <Period>{data.period}</Period>
 
-            <Price>{`R$ ${data.rent.price}`}</Price>
+            <Price>{`R$ ${data.price}`}</Price>
           </Rent>
 
           <Type>
@@ -55,7 +45,7 @@ export const Car: FC<CarProps> = ({ data, ...rest }) => {
         </About>
       </Details>
 
-      <Picture source={{ uri: data.picture }} resizeMode="contain" />
+      <Picture source={{ uri: data.thumbnail }} resizeMode="contain" />
     </Container>
   );
 };

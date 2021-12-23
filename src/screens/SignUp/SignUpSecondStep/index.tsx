@@ -16,6 +16,7 @@ import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 
 import { DefaultStackParamList } from "../../../routes/DefaultStack";
+import { api } from "../../../services/api";
 
 import {
   Container,
@@ -51,6 +52,8 @@ export const SignUpSecondStep: FC = () => {
   const navigation = useNavigation();
   const route = useRoute<SignUpSecondStepScreenRouteProp>();
 
+  const { driverLicense, email, name } = route.params.user;
+
   const passwordConfirmationInputRef = useRef<TextInput>(null);
 
   const [formData, setFormData] = useState({} as FormData);
@@ -66,8 +69,12 @@ export const SignUpSecondStep: FC = () => {
 
       await formSchema.validate(formData, { abortEarly: false });
 
-      setIsSignuping(false);
-      console.log(route.params.user);
+      await api.post("/users", {
+        name,
+        driver_license: driverLicense,
+        email,
+        password: formData.password,
+      });
 
       navigation.navigate("Confirmation", {
         title: "Conta criada!",
@@ -78,19 +85,14 @@ export const SignUpSecondStep: FC = () => {
       setIsSignuping(false);
 
       if (error instanceof Yup.ValidationError) {
-        if (error instanceof Yup.ValidationError) {
-          Alert.alert(
-            "Ops, não foi possível continuar!",
-            error.inner[0].message
-          );
-          return;
-        }
-
-        Alert.alert(
-          "Ops, não foi possível criar sua conta!",
-          "Ocorreu um erro inesperado ao criar sua conta, verifique os campos e tente novamente."
-        );
+        Alert.alert("Ops, não foi possível continuar!", error.inner[0].message);
+        return;
       }
+
+      Alert.alert(
+        "Ops, não foi possível criar sua conta!",
+        "Ocorreu um erro inesperado ao criar sua conta, verifique os campos e tente novamente."
+      );
     }
   };
 

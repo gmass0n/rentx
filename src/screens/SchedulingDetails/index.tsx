@@ -76,7 +76,7 @@ export const SchedulingDetails: FC = () => {
     ),
   };
 
-  const rentTotal = Number(dates.length * car.rent.price);
+  const rentTotal = Number(dates.length * car.price);
 
   const handleFinishScheduling = async () => {
     try {
@@ -154,9 +154,9 @@ export const SchedulingDetails: FC = () => {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
+            <Period>{car.period}</Period>
 
-            <Price>{`R$ ${car.rent.price}`}</Price>
+            <Price>{`R$ ${car.price}`}</Price>
           </Rent>
         </Details>
 
@@ -202,7 +202,7 @@ export const SchedulingDetails: FC = () => {
           <RentalPriceQuota>
             <RentalPriceQuotaTitle>Total</RentalPriceQuotaTitle>
 
-            <RentalPriceQuotaValue>{`R$ ${car.rent.price} x${dates.length} ${
+            <RentalPriceQuotaValue>{`R$ ${car.price} x${dates.length} ${
               dates.length === 1 ? "diária" : "diárias"
             }`}</RentalPriceQuotaValue>
           </RentalPriceQuota>
