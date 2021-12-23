@@ -144,10 +144,10 @@ export const SignUpFirstStep: FC = () => {
               <Button
                 title="Continuar"
                 onPress={handleSubmit}
-                enabled={
+                disabled={
                   Object.values(formData).length > 0
-                    ? Object.values(formData).every((value) => !!value)
-                    : false
+                    ? !!Object.values(formData).every((value) => !!value)
+                    : true
                 }
               />
             </Form>

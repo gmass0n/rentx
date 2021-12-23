@@ -75,9 +75,12 @@ export const SignIn: FC = () => {
     <KeyboardAvoidingView
       behavior="padding"
       enabled
-      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+      style={{
+        flex: 1,
+        justifyContent: "center",
+      }}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <TouchableWithoutFeedback>
         <Container>
           <StatusBar
             barStyle="dark-content"
@@ -119,6 +122,7 @@ export const SignIn: FC = () => {
               name="password"
               onChangeValue={handelChangeValue}
               ref={passwordInputRef}
+              onSubmitEditing={handleSignIn}
               returnKeyType="done"
             />
           </Form>
@@ -126,14 +130,14 @@ export const SignIn: FC = () => {
           <Footer>
             <Button
               title="Entrar"
-              enabled={
+              disabled={
                 Object.values(formData).length > 0
-                  ? Object.values(formData).every((value) => !!value)
-                  : false
+                  ? !!Object.values(formData).every((value) => !!value)
+                  : true
               }
               isLoading={isSigning}
               onPress={handleSignIn}
-              style={{ marginBottom: RFValue(8) }}
+              containerStyle={{ marginBottom: RFValue(8) }}
             />
 
             <Button

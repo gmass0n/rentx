@@ -194,7 +194,7 @@ export const Scheduling: FC = () => {
         <Button
           title="Continuar"
           onPress={handleNavigateToSchedulingDetails}
-          enabled={!!rentalPeriod.formattedStart || !!rentalPeriod.formattedEnd}
+          disabled={!rentalPeriod.formattedStart || !rentalPeriod.formattedEnd}
         />
       </Footer>
     </Container>

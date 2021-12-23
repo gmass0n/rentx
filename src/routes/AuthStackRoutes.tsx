@@ -26,10 +26,17 @@ const { Navigator, Screen } =
 
 export const AuthStackRoutes: FC = () => {
   return (
-    <Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
+    <Navigator
+      initialRouteName="Splash"
+      screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+    >
       <Screen name="Splash" component={Splash} />
 
-      <Screen name="SignIn" component={SignIn} />
+      <Screen
+        name="SignIn"
+        component={SignIn}
+        options={{ gestureEnabled: false }}
+      />
 
       <Screen name="SignUpFirstStep" component={SignUpFirstStep} />
 

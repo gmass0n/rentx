@@ -30,7 +30,10 @@ const { Navigator, Screen } =
 
 export const AppStackRoutes: FC = () => {
   return (
-    <Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+    <Navigator
+      initialRouteName="Home"
+      screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+    >
       <Screen name="Home" component={Home} />
 
       <Screen name="CarDetails" component={CarDetails} />

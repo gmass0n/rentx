@@ -31,7 +31,7 @@ export const Confirmation: FC = () => {
   const route = useRoute<ConfirmationScreenRouteProp>();
   const { width } = useWindowDimensions();
 
-  const { title, message, nextScreenRoute } = route.params;
+  const { title, message, nextScreenRoute } = route.params || {};
 
   const handleNavigateToHome = () => {
     navigation.navigate(nextScreenRoute);

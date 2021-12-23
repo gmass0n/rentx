@@ -47,7 +47,7 @@ export const Splash: FC = () => {
   const startApp = () => {
     navigation.reset({
       index: 0,
-      routes: [{ name: "Home" }],
+      routes: [{ name: "SignIn" }],
     });
   };
 

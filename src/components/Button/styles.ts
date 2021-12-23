@@ -16,13 +16,22 @@ interface TitleProps {
 export const Container = styled(RectButton)<ContainerProps>`
   width: 100%;
   height: ${RFValue(48)}px;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: ${({ theme, color }) => theme.colors[color]};
+
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
+`;
+
+export const Content = styled.View`
+  width: 100%;
+  height: ${RFValue(48)}px;
   padding: 0 ${RFValue(18)}px;
 
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme, color }) => theme.colors[color]};
-
-  opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
 `;
 
 export const Title = styled.Text<TitleProps>`

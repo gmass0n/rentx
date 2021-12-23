@@ -1,31 +1,36 @@
 import { FC } from "react";
+import { StyleProp, ViewStyle } from "react-native";
 import { ThemeColorsKey } from "styled-components";
-import { RectButtonProps } from "react-native-gesture-handler";
 
 import { Container, Title } from "./styles";
 import { Spinner } from "../Spinner";
 
-interface ButtonProps extends RectButtonProps {
+export interface ButtonProps {
   title: string;
   color?: ThemeColorsKey;
   textColor?: ThemeColorsKey;
   isLoading?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
+  disabled?: boolean;
+  onPress(): void;
 }
 
 export const Button: FC<ButtonProps> = ({
   color = "main",
   textColor = "shape",
   isLoading,
-  enabled = true,
+  disabled,
   title,
-  ...rest
+  containerStyle,
+  onPress,
 }) => {
   return (
     <Container
       color={color}
-      enabled={isLoading ? false : enabled}
-      isDisabled={!enabled}
-      {...rest}
+      isDisabled={disabled}
+      style={containerStyle}
+      enabled={isLoading ? false : !disabled}
+      onPress={onPress}
     >
       {isLoading ? (
         <Spinner color={textColor} size="small" style={{ flex: 0 }} />

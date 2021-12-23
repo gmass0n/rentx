@@ -158,10 +158,10 @@ export const SignUpSecondStep: FC = () => {
                 color="success"
                 onPress={handleSignUp}
                 isLoading={isSignuping}
-                enabled={
+                disabled={
                   Object.values(formData).length > 0
-                    ? Object.values(formData).every((value) => !!value)
-                    : false
+                    ? !!Object.values(formData).every((value) => !!value)
+                    : true
                 }
               />
             </Form>

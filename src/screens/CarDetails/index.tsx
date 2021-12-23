@@ -16,7 +16,7 @@ import { AppStackRoutesParamList } from "../../routes/AppStackRoutes";
 import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
 import { Accessory } from "../../components/Accessory";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/Button/index";
 
 import {
   Container,
