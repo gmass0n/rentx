@@ -1,9 +1,10 @@
-import { FC } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   StatusBar,
   TouchableWithoutFeedback,
   Keyboard,
+  TextInput,
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
@@ -12,7 +13,20 @@ import { Input } from "../../components/Input";
 
 import { Container, Header, Title, Subtitle, Form, Footer } from "./styles";
 
+interface FormData {
+  email: string;
+  password: string;
+}
+
 export const SignIn: FC = () => {
+  const passwordInputRef = useRef<TextInput>(null);
+
+  const [formData, setFormData] = useState({} as FormData);
+
+  const handelChangeValue = useCallback((text: string, name: string) => {
+    setFormData((prevState) => ({ ...prevState, [name]: text }));
+  }, []);
+
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -46,15 +60,28 @@ export const SignIn: FC = () => {
               keyboardType="email-address"
               autoCapitalize="none"
               containerStyle={{ marginBottom: RFValue(8) }}
+              value={formData.email}
+              name="email"
+              onChangeValue={handelChangeValue}
+              returnKeyType="next"
+              onSubmitEditing={() => passwordInputRef.current?.focus()}
             />
 
-            <Input icon="lock" placeholder="Digite sua senha" secureTextEntry />
+            <Input
+              icon="lock"
+              placeholder="Digite sua senha"
+              secureTextEntry
+              value={formData.password}
+              name="password"
+              onChangeValue={handelChangeValue}
+              ref={passwordInputRef}
+            />
           </Form>
 
           <Footer>
             <Button
               title="Entrar"
-              enabled={false}
+              enabled={!!formData.email && !!formData.password}
               isLoading={false}
               style={{ marginBottom: RFValue(8) }}
             />
