@@ -30,11 +30,15 @@ export const AppTabRoutes: FC = () => {
       activeColor={theme.colors.main}
       inactiveColor={theme.colors.text_details}
       barStyle={{
-        ...(isIphoneX() && {
-          paddingTop: RFValue(10),
-          height: RFValue(76),
-        }),
         backgroundColor: theme.colors.background_primary,
+        ...(isIphoneX()
+          ? {
+              paddingTop: RFValue(10),
+              height: RFValue(76),
+            }
+          : {
+              height: RFValue(50),
+            }),
       }}
     >
       <Screen

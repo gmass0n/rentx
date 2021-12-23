@@ -160,7 +160,7 @@ export const SignUpSecondStep: FC = () => {
                 isLoading={isSignuping}
                 disabled={
                   Object.values(formData).length > 0
-                    ? !!Object.values(formData).every((value) => !!value)
+                    ? !Object.values(formData).every((value) => !!value)
                     : true
                 }
               />

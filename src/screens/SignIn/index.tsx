@@ -132,7 +132,7 @@ export const SignIn: FC = () => {
               title="Entrar"
               disabled={
                 Object.values(formData).length > 0
-                  ? !!Object.values(formData).every((value) => !!value)
+                  ? !Object.values(formData).every((value) => !!value)
                   : true
               }
               isLoading={isSigning}

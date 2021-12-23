@@ -7,12 +7,17 @@ export const Container = styled(RectButton)`
   height: ${RFValue(120)}px;
 
   background-color: ${({ theme }) => theme.colors.background_secondary};
+`;
+
+export const Content = styled.View`
+  width: 100%;
+  height: 100%;
+
+  padding: ${RFValue(24)}px;
 
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  padding: ${RFValue(24)}px;
 `;
 
 export const Details = styled.View``;

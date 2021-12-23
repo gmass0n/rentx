@@ -10,7 +10,7 @@ interface ConfirmButtonProps {
 
 export const ConfirmButton: FC<ConfirmButtonProps> = ({ title, onPress }) => {
   return (
-    <Container>
+    <Container rippleColor="transparent">
       <TouchableNativeFeedback onPress={onPress}>
         <Title>{title}</Title>
       </TouchableNativeFeedback>

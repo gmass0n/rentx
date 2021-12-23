@@ -16,7 +16,12 @@ export const Button: FC<ButtonProps> = ({
   ...rest
 }) => {
   return (
-    <Container color={color} isDisabled={disabled} style={containerStyle}>
+    <Container
+      rippleColor="transparent"
+      color={color}
+      isDisabled={disabled}
+      style={containerStyle}
+    >
       <TouchableNativeFeedback disabled={isLoading || disabled} {...rest}>
         <Content>
           {isLoading ? (
