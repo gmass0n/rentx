@@ -88,7 +88,7 @@ export const SignIn: FC = () => {
             </Title>
 
             <Subtitle>
-              Faça seu login para começar{"\n"}
+              Entre com a sua conta para começar{"\n"}
               uma experiência incrível.
             </Subtitle>
           </Header>
