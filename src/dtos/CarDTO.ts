@@ -1,4 +1,5 @@
 import { CarAccessoryDTO } from "./CarAccessoryDTO";
+import { CarPhotoDTO } from "./CarPhotoDTO";
 
 export interface CarDTO {
   id: string;
@@ -9,6 +10,6 @@ export interface CarDTO {
   about: string;
   thumbnail: string;
   accessories: CarAccessoryDTO[];
-  photos: string[];
+  photos: CarPhotoDTO[];
   fuel_type: string;
 }

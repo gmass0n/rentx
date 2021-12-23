@@ -75,7 +75,7 @@ export const CarDetails: FC = () => {
         </Header>
 
         <CarImagesContent style={imagesSliderStyle}>
-          <ImagesSlider urls={car.photos} />
+          <ImagesSlider photos={car.photos} />
         </CarImagesContent>
       </AnimatedHeader>
 
@@ -88,16 +88,16 @@ export const CarDetails: FC = () => {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
+            <Period>{car.period}</Period>
 
-            <Price>{`R$ ${car.rent.price}`}</Price>
+            <Price>{`R$ ${car.price}`}</Price>
           </Rent>
         </Details>
 
         <Accessories>
           {car.accessories.map((accesory) => (
             <Accessory
-              key={accesory.type}
+              key={accesory.id}
               name={accesory.name}
               icon={getAccessoryIcon(accesory.type)}
             />

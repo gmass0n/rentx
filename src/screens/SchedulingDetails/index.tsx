@@ -141,7 +141,7 @@ export const SchedulingDetails: FC = () => {
 
       <CarImagesContainer>
         <CarImagesContent>
-          <ImagesSlider urls={car.photos} />
+          <ImagesSlider photos={car.photos} />
         </CarImagesContent>
       </CarImagesContainer>
 
@@ -163,7 +163,7 @@ export const SchedulingDetails: FC = () => {
         <Acessories>
           {car.accessories.map((accesory) => (
             <Accessory
-              key={accesory.type}
+              key={accesory.id}
               name={accesory.name}
               icon={getAccessoryIcon(accesory.type)}
             />

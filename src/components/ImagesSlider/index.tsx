@@ -1,12 +1,13 @@
 import { FC, useRef, useState } from "react";
 import { FlatList, ViewToken } from "react-native";
+import { CarPhotoDTO } from "../../dtos/CarPhotoDTO";
 
 import { Bullet } from "../Bullet";
 
 import { Container, ImageIndexes, CarImageWrapper, CarImage } from "./styles";
 
 interface ImagesSliderProps {
-  urls: string[];
+  photos: CarPhotoDTO[];
 }
 
 interface ChangeImageProps {
@@ -14,7 +15,7 @@ interface ChangeImageProps {
   changed: ViewToken[];
 }
 
-export const ImagesSlider: FC<ImagesSliderProps> = ({ urls }) => {
+export const ImagesSlider: FC<ImagesSliderProps> = ({ photos }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const indexChanged = useRef((info: ChangeImageProps) => {
@@ -24,20 +25,20 @@ export const ImagesSlider: FC<ImagesSliderProps> = ({ urls }) => {
   return (
     <Container>
       <ImageIndexes>
-        {urls.map((url, index) => (
-          <Bullet key={url} isActive={currentIndex === index} />
+        {photos.map((photo, index) => (
+          <Bullet key={photo.id} isActive={currentIndex === index} />
         ))}
       </ImageIndexes>
 
       <FlatList
-        data={urls}
-        keyExtractor={(url) => url}
+        data={photos}
+        keyExtractor={(photo) => photo.id}
         horizontal
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={indexChanged.current}
-        renderItem={({ item: url }) => (
+        renderItem={({ item: photo }) => (
           <CarImageWrapper>
-            <CarImage source={{ uri: url }} resizeMode="contain" />
+            <CarImage source={{ uri: photo.photo }} resizeMode="contain" />
           </CarImageWrapper>
         )}
       />

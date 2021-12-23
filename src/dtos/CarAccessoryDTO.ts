@@ -9,6 +9,7 @@ export type CarAccessoryType =
   | "seats";
 
 export interface CarAccessoryDTO {
+  id: string;
   type: CarAccessoryType;
   name: string;
 }
