@@ -35,7 +35,7 @@ export const Subtitle = styled.Text`
 export const Form = styled.View`
   width: 100%;
 
-  margin: ${RFValue(24)}px 0;
+  margin: ${RFValue(64)}px 0 ${RFValue(16)}px;
 `;
 
 export const Footer = styled.View`

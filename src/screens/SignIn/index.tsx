@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { FC, useCallback, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -28,6 +29,8 @@ const formSchema = Yup.object().shape({
 });
 
 export const SignIn: FC = () => {
+  const navigation = useNavigation();
+
   const passwordInputRef = useRef<TextInput>(null);
 
   const [formData, setFormData] = useState({} as FormData);
@@ -36,6 +39,10 @@ export const SignIn: FC = () => {
   const handelChangeValue = useCallback((text: string, name: string) => {
     setFormData((prevState) => ({ ...prevState, [name]: text }));
   }, []);
+
+  const handleNavigateToSignUp = () => {
+    navigation.navigate("SignUpFirstStep");
+  };
 
   const handleSignIn = async () => {
     try {
@@ -108,6 +115,7 @@ export const SignIn: FC = () => {
               name="password"
               onChangeValue={handelChangeValue}
               ref={passwordInputRef}
+              returnKeyType="done"
             />
           </Form>
 
@@ -124,6 +132,7 @@ export const SignIn: FC = () => {
               title="Criar conta"
               color="background_secondary"
               textColor="main"
+              onPress={handleNavigateToSignUp}
             />
           </Footer>
         </Container>

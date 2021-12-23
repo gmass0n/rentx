@@ -9,6 +9,7 @@ import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
 import { SignIn } from "../screens/SignIn";
+import { SignUpFirstStep } from "../screens/SignUp/SignUpFirstStep";
 
 import { CarDTO } from "../dtos/CarDTO";
 
@@ -21,6 +22,7 @@ export type DefaultStackParamList = {
   SchedulingComplete: undefined;
   MyCars: undefined;
   SignIn: undefined;
+  SignUpFirstStep: undefined;
 };
 
 const { Navigator, Screen } =
@@ -32,6 +34,8 @@ export const DefaultStack: FC = () => {
       <Screen name="Splash" component={Splash} />
 
       <Screen name="SignIn" component={SignIn} />
+
+      <Screen name="SignUpFirstStep" component={SignUpFirstStep} />
 
       <Screen
         name="Home"
