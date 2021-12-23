@@ -55,7 +55,7 @@ export const SignIn: FC = () => {
       if (error instanceof Yup.ValidationError) {
         Alert.alert(
           "Ops, não foi possível entrar com a sua conta!",
-          error.message
+          error.inner[0].message
         );
         return;
       }
@@ -122,7 +122,11 @@ export const SignIn: FC = () => {
           <Footer>
             <Button
               title="Entrar"
-              enabled={!!formData.email && !!formData.password}
+              enabled={
+                Object.values(formData).length > 0
+                  ? Object.values(formData).every((value) => !!value)
+                  : false
+              }
               isLoading={isSigning}
               onPress={handleSignIn}
               style={{ marginBottom: RFValue(8) }}

@@ -1,11 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import { FC, useCallback, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
   TextInput,
+  Alert,
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import * as Yup from "yup";
 
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
@@ -30,7 +33,19 @@ interface FormData {
   email: string;
 }
 
+const formSchema = Yup.object().shape({
+  name: Yup.string().required("Por favor, digite seu nome completo."),
+  email: Yup.string()
+    .email("Por favor, digite um e-mail válido.")
+    .required("Por favor, digite um e-mail."),
+  cnh: Yup.string()
+    .required("Por favor, digite sua CNH.")
+    .min(11, "Por favor, digite um CNH válido."),
+});
+
 export const SignUpFirstStep: FC = () => {
+  const navigaton = useNavigation();
+
   const emailInputRef = useRef<TextInput>(null);
   const cnhInputRef = useRef<TextInput>(null);
 
@@ -39,6 +54,23 @@ export const SignUpFirstStep: FC = () => {
   const handelChangeValue = useCallback((text: string, name: string) => {
     setFormData((prevState) => ({ ...prevState, [name]: text }));
   }, []);
+
+  const handleSubmit = async () => {
+    try {
+      await formSchema.validate(formData, { abortEarly: false });
+
+      navigaton.navigate("SignUpSecondStep");
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        if (error instanceof Yup.ValidationError) {
+          Alert.alert(
+            "Ops, não foi possível continuar!",
+            error.inner[0].message
+          );
+        }
+      }
+    }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -88,6 +120,7 @@ export const SignUpFirstStep: FC = () => {
                 value={formData.email}
                 onChangeValue={handelChangeValue}
                 keyboardType="email-address"
+                autoCapitalize="none"
                 returnKeyType="next"
                 containerStyle={{ marginBottom: RFValue(8) }}
                 onSubmitEditing={() => cnhInputRef.current.focus()}
@@ -103,10 +136,19 @@ export const SignUpFirstStep: FC = () => {
                 containerStyle={{ marginBottom: RFValue(16) }}
                 returnKeyType="done"
                 keyboardType="numeric"
+                maxLength={11}
                 ref={cnhInputRef}
               />
 
-              <Button title="Continuar" />
+              <Button
+                title="Continuar"
+                onPress={handleSubmit}
+                enabled={
+                  Object.values(formData).length > 0
+                    ? Object.values(formData).every((value) => !!value)
+                    : false
+                }
+              />
             </Form>
           </Content>
         </KeyboardAvoidingView>
