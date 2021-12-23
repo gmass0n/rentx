@@ -1,5 +1,10 @@
 import { FC } from "react";
-import { StatusBar } from "react-native";
+import {
+  KeyboardAvoidingView,
+  StatusBar,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 import { Button } from "../../components/Button";
@@ -9,51 +14,59 @@ import { Container, Header, Title, Subtitle, Form, Footer } from "./styles";
 
 export const SignIn: FC = () => {
   return (
-    <Container>
-      <StatusBar
-        barStyle="dark-content"
-        translucent
-        backgroundColor="transparent"
-      />
+    <KeyboardAvoidingView
+      behavior="padding"
+      enabled
+      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <StatusBar
+            barStyle="dark-content"
+            translucent
+            backgroundColor="transparent"
+          />
 
-      <Header>
-        <Title>
-          Estamos{"\n"}
-          quase lá.
-        </Title>
+          <Header>
+            <Title>
+              Estamos{"\n"}
+              quase lá.
+            </Title>
 
-        <Subtitle>
-          Faça seu login para começar{"\n"}
-          uma experiência incrível.
-        </Subtitle>
-      </Header>
+            <Subtitle>
+              Faça seu login para começar{"\n"}
+              uma experiência incrível.
+            </Subtitle>
+          </Header>
 
-      <Form>
-        <Input
-          icon="mail"
-          placeholder="Digite seu e-mail"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          containerStyle={{ marginBottom: RFValue(8) }}
-        />
+          <Form>
+            <Input
+              icon="mail"
+              placeholder="Digite seu e-mail"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              containerStyle={{ marginBottom: RFValue(8) }}
+            />
 
-        <Input icon="lock" placeholder="Digite sua senha" secureTextEntry />
-      </Form>
+            <Input icon="lock" placeholder="Digite sua senha" secureTextEntry />
+          </Form>
 
-      <Footer>
-        <Button
-          title="Entrar"
-          enabled={false}
-          isLoading={false}
-          style={{ marginBottom: RFValue(8) }}
-        />
+          <Footer>
+            <Button
+              title="Entrar"
+              enabled={false}
+              isLoading={false}
+              style={{ marginBottom: RFValue(8) }}
+            />
 
-        <Button
-          title="Criar conta"
-          color="background_secondary"
-          textColor="main"
-        />
-      </Footer>
-    </Container>
+            <Button
+              title="Criar conta"
+              color="background_secondary"
+              textColor="main"
+            />
+          </Footer>
+        </Container>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };

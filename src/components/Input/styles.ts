@@ -36,7 +36,7 @@ export const TextInput = styled.TextInput<TextInputProps>`
 
   color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.primary_400};
-  font-size: ${({ secureTextEntry }) => RFValue(secureTextEntry ? 10 : 14)}px;
+  font-size: ${RFValue(14)}px;
 `;
 
 export const PasswordButton = styled(BorderlessButton)`
