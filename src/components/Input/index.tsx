@@ -5,6 +5,8 @@ import {
   useEffect,
   forwardRef,
   ForwardRefRenderFunction,
+  useRef,
+  MutableRefObject,
 } from "react";
 import {
   NativeSyntheticEvent,
@@ -45,8 +47,10 @@ const BaseInput: ForwardRefRenderFunction<TextInput, InputProps> = (
     value,
     ...rest
   },
-  ref: any
+  ref: MutableRefObject<TextInput>
 ) => {
+  const passwordRef = ref || useRef<TextInput>(null);
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -62,7 +66,8 @@ const BaseInput: ForwardRefRenderFunction<TextInput, InputProps> = (
   }, [isFilled, value]);
 
   const toggleIsPasswordVisible = () => {
-    ref.current?.focus();
+    passwordRef?.current?.focus();
+
     setIsPasswordVisible((prevState) => !prevState);
   };
 
@@ -102,7 +107,7 @@ const BaseInput: ForwardRefRenderFunction<TextInput, InputProps> = (
         onBlur={handleBlur}
         onChangeText={(text) => onChangeValue(text, name)}
         value={value}
-        ref={ref}
+        ref={passwordRef}
         {...rest}
       />
 

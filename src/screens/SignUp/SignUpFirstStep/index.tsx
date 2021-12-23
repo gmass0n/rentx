@@ -29,7 +29,7 @@ import {
 
 interface FormData {
   name: string;
-  cnh: string;
+  driverLicense: string;
   email: string;
 }
 
@@ -38,7 +38,7 @@ const formSchema = Yup.object().shape({
   email: Yup.string()
     .email("Por favor, digite um e-mail válido.")
     .required("Por favor, digite um e-mail."),
-  cnh: Yup.string()
+  driverLicense: Yup.string()
     .required("Por favor, digite sua CNH.")
     .min(11, "Por favor, digite um CNH válido."),
 });
@@ -47,7 +47,7 @@ export const SignUpFirstStep: FC = () => {
   const navigaton = useNavigation();
 
   const emailInputRef = useRef<TextInput>(null);
-  const cnhInputRef = useRef<TextInput>(null);
+  const driverLicenseInputRef = useRef<TextInput>(null);
 
   const [formData, setFormData] = useState({} as FormData);
 
@@ -59,7 +59,7 @@ export const SignUpFirstStep: FC = () => {
     try {
       await formSchema.validate(formData, { abortEarly: false });
 
-      navigaton.navigate("SignUpSecondStep");
+      navigaton.navigate("SignUpSecondStep", { user: formData });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         if (error instanceof Yup.ValidationError) {
@@ -123,21 +123,22 @@ export const SignUpFirstStep: FC = () => {
                 autoCapitalize="none"
                 returnKeyType="next"
                 containerStyle={{ marginBottom: RFValue(8) }}
-                onSubmitEditing={() => cnhInputRef.current.focus()}
+                onSubmitEditing={() => driverLicenseInputRef.current.focus()}
                 ref={emailInputRef}
               />
 
               <Input
-                name="cnh"
+                name="driverLicense"
                 icon="credit-card"
                 placeholder="Digite sua CNH"
-                value={formData.cnh}
+                value={formData.driverLicense}
                 onChangeValue={handelChangeValue}
                 containerStyle={{ marginBottom: RFValue(16) }}
                 returnKeyType="done"
                 keyboardType="numeric"
                 maxLength={11}
-                ref={cnhInputRef}
+                ref={driverLicenseInputRef}
+                onSubmitEditing={handleSubmit}
               />
 
               <Button

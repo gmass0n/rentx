@@ -24,7 +24,9 @@ export type DefaultStackParamList = {
   MyCars: undefined;
   SignIn: undefined;
   SignUpFirstStep: undefined;
-  SignUpSecondStep: undefined;
+  SignUpSecondStep: {
+    user: { name: string; driverLicense: string; email: string };
+  };
 };
 
 const { Navigator, Screen } =
@@ -32,7 +34,10 @@ const { Navigator, Screen } =
 
 export const DefaultStack: FC = () => {
   return (
-    <Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
+    <Navigator
+      initialRouteName="SignUpFirstStep"
+      screenOptions={{ headerShown: false }}
+    >
       <Screen name="Splash" component={Splash} />
 
       <Screen name="SignIn" component={SignIn} />
