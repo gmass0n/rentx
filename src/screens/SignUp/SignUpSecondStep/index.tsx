@@ -15,7 +15,7 @@ import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 
-import { DefaultStackParamList } from "../../../routes/DefaultStack";
+import { AuthStackRoutesParamList } from "../../../routes/AuthStackRoutes";
 import { api } from "../../../services/api";
 
 import {
@@ -36,7 +36,7 @@ interface FormData {
 }
 
 type SignUpSecondStepScreenRouteProp = RouteProp<
-  DefaultStackParamList,
+  AuthStackRoutesParamList,
   "SignUpSecondStep"
 >;
 

@@ -17,7 +17,7 @@ import { ImagesSlider } from "../../components/ImagesSlider";
 import { Accessory } from "../../components/Accessory";
 import { Button } from "../../components/Button";
 
-import { DefaultStackParamList } from "../../routes/DefaultStack";
+import { AppStackRoutesParamList } from "../../routes/AppStackRoutes";
 
 import { ScheduleByCarDTO } from "../../dtos/ScheduleByCarDTO";
 
@@ -50,7 +50,7 @@ import {
 } from "./styles";
 
 type SchedulingDetailsScreenRouteProp = RouteProp<
-  DefaultStackParamList,
+  AppStackRoutesParamList,
   "SchedulingDetails"
 >;
 

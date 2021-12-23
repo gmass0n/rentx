@@ -11,7 +11,7 @@ import Animated, {
 
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
-import { DefaultStackParamList } from "../../routes/DefaultStack";
+import { AppStackRoutesParamList } from "../../routes/AppStackRoutes";
 
 import { BackButton } from "../../components/BackButton";
 import { ImagesSlider } from "../../components/ImagesSlider";
@@ -36,7 +36,10 @@ import {
   Footer,
 } from "./styles";
 
-type CarDetailsScreenRouteProp = RouteProp<DefaultStackParamList, "CarDetails">;
+type CarDetailsScreenRouteProp = RouteProp<
+  AppStackRoutesParamList,
+  "CarDetails"
+>;
 
 export const CarDetails: FC = () => {
   const navigation = useNavigation();

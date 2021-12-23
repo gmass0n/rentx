@@ -8,7 +8,7 @@ import DoneSVG from "../../assets/done.svg";
 
 import { ConfirmButton } from "../../components/ConfirmButton";
 
-import { DefaultStackParamList } from "../../routes/DefaultStack";
+import { AppStackRoutesParamList } from "../../routes/AppStackRoutes";
 
 import {
   Container,
@@ -22,7 +22,7 @@ import {
 } from "./styles";
 
 type ConfirmationScreenRouteProp = RouteProp<
-  DefaultStackParamList,
+  AppStackRoutesParamList,
   "Confirmation"
 >;
 

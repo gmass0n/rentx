@@ -22,7 +22,7 @@ import { Button } from "../../components/Button";
 import { Calendar, MarkedDateProps } from "../../components/Calendar";
 import { AnimatedLoading } from "../../components/AnimatedLoading";
 
-import { DefaultStackParamList } from "../../routes/DefaultStack";
+import { AppStackRoutesParamList } from "../../routes/AppStackRoutes";
 
 import { ScheduleByCarDTO } from "../../dtos/ScheduleByCarDTO";
 
@@ -39,7 +39,10 @@ import {
   Footer,
 } from "./styles";
 
-type SchedulingScreenRouteProp = RouteProp<DefaultStackParamList, "Scheduling">;
+type SchedulingScreenRouteProp = RouteProp<
+  AppStackRoutesParamList,
+  "Scheduling"
+>;
 
 interface RentalPeriodProps {
   formattedStart: string;
