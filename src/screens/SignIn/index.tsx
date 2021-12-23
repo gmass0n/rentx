@@ -5,8 +5,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TextInput,
+  Alert,
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import * as Yup from "yup";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -18,14 +20,45 @@ interface FormData {
   password: string;
 }
 
+const formSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Por favor, digite um e-mail válido.")
+    .required("Por favor, digite um e-mail."),
+  password: Yup.string().required("Por favor, digite uma senha."),
+});
+
 export const SignIn: FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
 
   const [formData, setFormData] = useState({} as FormData);
+  const [isSigning, setIsSigning] = useState(false);
 
   const handelChangeValue = useCallback((text: string, name: string) => {
     setFormData((prevState) => ({ ...prevState, [name]: text }));
   }, []);
+
+  const handleSignIn = async () => {
+    try {
+      setIsSigning(true);
+
+      await formSchema.validate(formData, { abortEarly: false });
+    } catch (error) {
+      setIsSigning(false);
+
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert(
+          "Ops, não foi possível entrar com a sua conta!",
+          error.message
+        );
+        return;
+      }
+
+      Alert.alert(
+        "Ops, não foi possível entrar com a sua conta!",
+        "Ocorreu um erro inesperado ao entrar com a sua conta, verifique as credenciais e tente novamente."
+      );
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -82,7 +115,8 @@ export const SignIn: FC = () => {
             <Button
               title="Entrar"
               enabled={!!formData.email && !!formData.password}
-              isLoading={false}
+              isLoading={isSigning}
+              onPress={handleSignIn}
               style={{ marginBottom: RFValue(8) }}
             />
 
