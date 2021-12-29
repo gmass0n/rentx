@@ -1,5 +1,5 @@
 import { ComponentType } from "react";
-import { FlatList } from "react-native";
+import { FlatList, StatusBar } from "react-native";
 import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
@@ -22,6 +22,7 @@ export const HeaderContent = styled.View`
   justify-content: space-between;
 
   padding: ${RFValue(24)}px;
+  padding-top: ${StatusBar.currentHeight + RFValue(24)}px;
 `;
 
 export const Title = styled.Text`

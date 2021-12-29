@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Alert } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
@@ -133,6 +133,12 @@ export const SchedulingDetails: FC = () => {
 
   return (
     <Container>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent
+        barStyle="dark-content"
+      />
+
       <Header>
         <HeaderContent>
           <BackButton />

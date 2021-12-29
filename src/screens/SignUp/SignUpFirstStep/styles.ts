@@ -1,3 +1,4 @@
+import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
@@ -19,6 +20,7 @@ export const HeaderContent = styled.View`
   align-items: center;
 
   padding: ${RFValue(24)}px;
+  padding-top: ${StatusBar.currentHeight + RFValue(24)}px;
 `;
 
 export const Steps = styled.View`

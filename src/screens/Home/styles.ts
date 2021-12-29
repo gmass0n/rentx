@@ -1,9 +1,8 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { FlatList } from "react-native";
+import { FlatList, Platform, StatusBar } from "react-native";
 import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
 import { ComponentType } from "react";
-import { RectButton } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 
 import { CarDTO } from "../../dtos/CarDTO";
@@ -28,6 +27,7 @@ export const HeaderContent = styled.View`
   flex-direction: row;
 
   padding: ${RFValue(24)}px;
+  padding-top: ${StatusBar.currentHeight + RFValue(24)}px;
 `;
 
 export const CarsTotal = styled(Animated.Text)`
@@ -46,19 +46,4 @@ export const CarsList = styled(FlatList as new () => FlatList<CarDTO>).attrs({
 
 export const CarsListSeparator = styled.View`
   margin-top: ${RFValue(8)}px;
-`;
-
-export const MyCarsButton = styled(RectButton)`
-  width: ${RFValue(60)}px;
-  height: ${RFValue(60)}px;
-  border-radius: ${RFValue(30)}px;
-  background-color: ${({ theme }) => theme.colors.main};
-
-  align-items: center;
-  justify-content: center;
-
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: ${RFValue(14)}px;
 `;

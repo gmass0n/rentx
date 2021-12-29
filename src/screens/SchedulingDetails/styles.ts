@@ -1,6 +1,7 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { isIphoneX, getBottomSpace } from "react-native-iphone-x-helper";
+import { StatusBar } from "react-native";
 
 export const Container = styled.View`
   flex: 1;
@@ -19,12 +20,13 @@ export const HeaderContent = styled.View`
   align-items: center;
 
   padding: ${RFValue(24)}px;
+  padding-top: ${StatusBar.currentHeight + RFValue(24)}px;
 `;
 
 export const CarImagesContainer = styled.SafeAreaView``;
 
 export const CarImagesContent = styled.View`
-  margin-top: ${RFValue(32)}px;
+  margin-top: ${StatusBar.currentHeight + RFValue(32)}px;
 `;
 
 export const Content = styled.ScrollView.attrs({

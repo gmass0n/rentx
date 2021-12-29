@@ -7,6 +7,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 import Logo from "../../assets/logo.svg";
 
@@ -24,13 +25,13 @@ import {
   CarsTotal,
   CarsList,
   CarsListSeparator,
-  MyCarsButton,
 } from "./styles";
 
 const AnimatedCarsList = Animated.createAnimatedComponent(CarsList);
 
 export const Home: FC = () => {
   const navigation = useNavigation();
+  const netInfo = useNetInfo();
 
   const animatedOpacity = useSharedValue(0);
 
@@ -60,6 +61,14 @@ export const Home: FC = () => {
       animatedOpacity.value = withTiming(1, { duration: 500 });
     }
   }, [isLoading]);
+
+  useEffect(() => {
+    if (netInfo.isConnected) {
+      console.log("online");
+    } else {
+      console.log("offline");
+    }
+  }, [netInfo.isConnected]);
 
   const handleNavigateToCarDetails = (car: CarDTO) => {
     navigation.navigate("CarDetails", { car });

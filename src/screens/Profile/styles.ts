@@ -1,6 +1,10 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled, { css } from "styled-components/native";
-import { Platform, TouchableOpacity as RNTouchableOpacity } from "react-native";
+import {
+  Platform,
+  StatusBar,
+  TouchableOpacity as RNTouchableOpacity,
+} from "react-native";
 import { TouchableOpacity as RNGestureHandlerTouchableOpacity } from "react-native-gesture-handler";
 
 interface OptionProps {
@@ -26,6 +30,7 @@ export const HeaderContent = styled.View`
   align-items: center;
 
   padding: ${RFValue(24)}px;
+  padding-top: ${StatusBar.currentHeight + RFValue(24)}px;
 `;
 
 export const HeaderTop = styled.View`
