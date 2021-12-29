@@ -2,6 +2,7 @@ import { FC } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
+import { TouchableNativeFeedback } from "react-native";
 
 interface ChangeAvatarButtonProps {
   onPress?(): void;
@@ -15,8 +16,10 @@ export const ChangeAvatarButton: FC<ChangeAvatarButtonProps> = ({
   const theme = useTheme();
 
   return (
-    <Container onPress={onPress}>
-      <Feather name="camera" size={RFValue(24)} color={theme.colors.shape} />
+    <Container rippleColor="transparent">
+      <TouchableNativeFeedback onPress={onPress}>
+        <Feather name="camera" size={RFValue(20)} color={theme.colors.shape} />
+      </TouchableNativeFeedback>
     </Container>
   );
 };

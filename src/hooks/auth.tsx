@@ -8,7 +8,7 @@ import { SessionDTO } from "../dtos/SessionDTO";
 
 import { api } from "../services/api";
 
-interface User {
+export interface User {
   id: string;
   user_id: string;
   email: string;

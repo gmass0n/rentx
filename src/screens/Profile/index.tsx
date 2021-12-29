@@ -6,10 +6,14 @@ import {
   Keyboard,
   TextInput,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 
+import { useAuth } from "../../hooks/auth";
+
+import { Input } from "../../components/Input";
 import { ChangeAvatarButton } from "../../components/ChangeAvatarButton";
 
 import {
@@ -27,10 +31,19 @@ import {
   OptionTitle,
   Form,
 } from "./styles";
-import { Input } from "../../components/Input";
-import { useAuth } from "../../hooks/auth";
+import { useCallback } from "react";
 
-type CurrentOption = "editData" | "editPassword";
+type CurrentOption = "dataForm" | "passwordForm";
+
+interface FormData {
+  avatar: string;
+  name: string;
+  email: string;
+  driverLicense: string;
+  currentPassword: string;
+  newPassword: string;
+  newPassordConfirmation: string;
+}
 
 export const Profile: FC = () => {
   const theme = useTheme();
@@ -41,14 +54,36 @@ export const Profile: FC = () => {
   const newPasswordInputRef = useRef<TextInput>(null);
   const newPasswordConfirmationInputRef = useRef<TextInput>(null);
 
-  const [formData, setFormData] = useState();
-  const [currentOption, setCurrentOption] = useState<CurrentOption>("editData");
+  const [currentOption, setCurrentOption] = useState<CurrentOption>("dataForm");
+  const [formData, setFormData] = useState({
+    avatar: user.avatar || null,
+    driverLicense: user.driver_license,
+    email: user.email,
+    name: user.name,
+  } as FormData);
 
   const handleToggleCurrentOption = () => {
     setCurrentOption((prevState) =>
-      prevState === "editData" ? "editPassword" : "editData"
+      prevState === "dataForm" ? "passwordForm" : "dataForm"
     );
   };
+
+  const handeChangeAvatar = async (): Promise<void> => {
+    const result: any = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+
+    if (result.cancelled) return;
+
+    setFormData((prevState) => ({ ...prevState, avatar: result.uri }));
+  };
+
+  const handleChangeValue = useCallback((value: string, name: string) => {
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  }, []);
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -77,9 +112,11 @@ export const Profile: FC = () => {
               </HeaderTop>
 
               <AvatarContainer>
-                <Avatar source={{ uri: "https://github.com/gmass0n.png" }} />
+                {!!formData.avatar && (
+                  <Avatar source={{ uri: formData.avatar }} />
+                )}
 
-                <ChangeAvatarButton />
+                <ChangeAvatarButton onPress={handeChangeAvatar} />
               </AvatarContainer>
             </HeaderContent>
           </Header>
@@ -87,32 +124,33 @@ export const Profile: FC = () => {
           <Content>
             <Options>
               <Option
-                isActive={currentOption === "editData"}
+                isActive={currentOption === "dataForm"}
                 onPress={handleToggleCurrentOption}
               >
-                <OptionTitle isActive={currentOption === "editData"}>
+                <OptionTitle isActive={currentOption === "dataForm"}>
                   Dados
                 </OptionTitle>
               </Option>
 
               <Option
-                isActive={currentOption === "editPassword"}
+                isActive={currentOption === "passwordForm"}
                 onPress={handleToggleCurrentOption}
               >
-                <OptionTitle isActive={currentOption === "editPassword"}>
+                <OptionTitle isActive={currentOption === "passwordForm"}>
                   Senha
                 </OptionTitle>
               </Option>
             </Options>
 
-            {currentOption === "editData" ? (
+            {currentOption === "dataForm" ? (
               <Form>
                 <Input
                   icon="user"
                   name="name"
                   placeholder="Digite o seu nome"
                   containerStyle={{ marginBottom: RFValue(8) }}
-                  defaultValue={user.name}
+                  value={formData.name}
+                  onChangeValue={handleChangeValue}
                   returnKeyType="next"
                   onSubmitEditing={() => driverLicenseInputRef.current.focus()}
                 />
@@ -122,7 +160,8 @@ export const Profile: FC = () => {
                   name="email"
                   editable={false}
                   containerStyle={{ marginBottom: RFValue(8) }}
-                  defaultValue={user.email}
+                  value={formData.email}
+                  onChangeValue={handleChangeValue}
                 />
 
                 <Input
@@ -130,24 +169,28 @@ export const Profile: FC = () => {
                   name="driverLicense"
                   placeholder="Digite a sua CNH"
                   keyboardType="numeric"
-                  defaultValue={user.driver_license}
+                  value={formData.driverLicense}
                   ref={driverLicenseInputRef}
                   returnKeyType="done"
                   maxLength={11}
+                  onChangeValue={handleChangeValue}
                 />
               </Form>
             ) : (
               <Form>
                 <Input
+                  name="currentPassword"
                   secureTextEntry
                   icon="lock"
                   placeholder="Digite sua senha atual"
                   containerStyle={{ marginBottom: RFValue(8) }}
                   returnKeyType="next"
                   onSubmitEditing={() => newPasswordInputRef.current.focus()}
+                  onChangeValue={handleChangeValue}
                 />
 
                 <Input
+                  name="newPassword"
                   secureTextEntry
                   icon="lock"
                   placeholder="Digite uma nova senha"
@@ -157,14 +200,17 @@ export const Profile: FC = () => {
                   onSubmitEditing={() =>
                     newPasswordConfirmationInputRef.current.focus()
                   }
+                  onChangeValue={handleChangeValue}
                   ref={newPasswordInputRef}
                 />
 
                 <Input
+                  name="newPasswordConfirmation"
                   secureTextEntry
                   icon="lock"
                   placeholder="Confirme sua nova senha"
                   returnKeyType="done"
+                  onChangeValue={handleChangeValue}
                   ref={newPasswordConfirmationInputRef}
                 />
               </Form>
