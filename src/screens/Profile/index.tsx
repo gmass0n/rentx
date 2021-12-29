@@ -1,20 +1,23 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import {
   StatusBar,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
   TextInput,
+  Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
+import * as Yup from "yup";
 
 import { useAuth } from "../../hooks/auth";
 
 import { Input } from "../../components/Input";
 import { ChangeAvatarButton } from "../../components/ChangeAvatarButton";
+import { Button } from "../../components/Button";
 
 import {
   Container,
@@ -25,13 +28,13 @@ import {
   LogoutButton,
   AvatarContainer,
   Avatar,
+  AvatarImage,
   Content,
   Options,
   Option,
   OptionTitle,
   Form,
 } from "./styles";
-import { useCallback } from "react";
 
 type CurrentOption = "dataForm" | "passwordForm";
 
@@ -45,16 +48,24 @@ interface FormData {
   newPassordConfirmation: string;
 }
 
+const dataFormSchema = Yup.object().shape({
+  name: Yup.string().required("Por favor, digite seu nome completo."),
+  driverLicense: Yup.string()
+    .required("Por favor, digite sua CNH.")
+    .min(11, "Por favor, digite um CNH válido."),
+});
+
 export const Profile: FC = () => {
   const theme = useTheme();
 
-  const { user, signOut } = useAuth();
+  const { user, signOut, updateUser } = useAuth();
 
   const driverLicenseInputRef = useRef<TextInput>(null);
   const newPasswordInputRef = useRef<TextInput>(null);
   const newPasswordConfirmationInputRef = useRef<TextInput>(null);
 
   const [currentOption, setCurrentOption] = useState<CurrentOption>("dataForm");
+  const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const [formData, setFormData] = useState({
     avatar: user.avatar || null,
     driverLicense: user.driver_license,
@@ -85,6 +96,38 @@ export const Profile: FC = () => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   }, []);
 
+  const handleUpdateProfile = async () => {
+    try {
+      setIsUpdatingProfile(true);
+
+      await dataFormSchema.validate(formData);
+
+      await updateUser({
+        avatar: formData.avatar,
+        driver_license: formData.driverLicense,
+        name: formData.name,
+      });
+
+      Alert.alert("Boa, seu perfil foi alterado com sucesso!");
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert(
+          "Ops, não foi possível salvar as alterações!",
+          error.message
+        );
+
+        return;
+      }
+
+      Alert.alert(
+        "Ops, não foi possível atualizar o perfil!",
+        "Ocorreu um erro inesperado ao atualizar o seu perfil, verifique as credenciais e tente novamente."
+      );
+    } finally {
+      setIsUpdatingProfile(false);
+    }
+  };
+
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -112,9 +155,11 @@ export const Profile: FC = () => {
               </HeaderTop>
 
               <AvatarContainer>
-                {!!formData.avatar && (
-                  <Avatar source={{ uri: formData.avatar }} />
-                )}
+                <Avatar>
+                  {!!formData.avatar && (
+                    <AvatarImage source={{ uri: formData.avatar }} />
+                  )}
+                </Avatar>
 
                 <ChangeAvatarButton onPress={handeChangeAvatar} />
               </AvatarContainer>
@@ -174,6 +219,13 @@ export const Profile: FC = () => {
                   returnKeyType="done"
                   maxLength={11}
                   onChangeValue={handleChangeValue}
+                  containerStyle={{ marginBottom: RFValue(16) }}
+                />
+
+                <Button
+                  title="Salvar alterações"
+                  onPress={handleUpdateProfile}
+                  isLoading={isUpdatingProfile}
                 />
               </Form>
             ) : (

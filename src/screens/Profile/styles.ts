@@ -55,11 +55,23 @@ export const AvatarContainer = styled.View`
   height: ${RFValue(160)}px;
   border-radius: ${RFValue(80)}px;
 
-  background: ${({ theme }) => theme.colors.shape};
   margin-bottom: -${RFValue(104)}px;
 `;
 
-export const Avatar = styled.Image`
+export const Avatar = styled.View`
+  width: ${RFValue(160)}px;
+  height: ${RFValue(160)}px;
+  border-radius: ${RFValue(80)}px;
+  border: ${({ theme }) => `${RFValue(2)}px solid ${theme.colors.shape}`};
+  background: ${({ theme }) => theme.colors.shape};
+
+  overflow: hidden;
+
+  align-items: center;
+  justify-content: center;
+`;
+
+export const AvatarImage = styled.Image`
   width: ${RFValue(160)}px;
   height: ${RFValue(160)}px;
   border-radius: ${RFValue(80)}px;

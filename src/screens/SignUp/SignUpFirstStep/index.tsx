@@ -57,17 +57,12 @@ export const SignUpFirstStep: FC = () => {
 
   const handleSubmit = async () => {
     try {
-      await formSchema.validate(formData, { abortEarly: false });
+      await formSchema.validate(formData);
 
       navigaton.navigate("SignUpSecondStep", { user: formData });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
-        if (error instanceof Yup.ValidationError) {
-          Alert.alert(
-            "Ops, não foi possível continuar!",
-            error.inner[0].message
-          );
-        }
+        Alert.alert("Ops, não foi possível continuar!", error.message);
       }
     }
   };

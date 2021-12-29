@@ -67,7 +67,7 @@ export const SignUpSecondStep: FC = () => {
     try {
       setIsSignuping(true);
 
-      await formSchema.validate(formData, { abortEarly: false });
+      await formSchema.validate(formData);
 
       await api.post("/users", {
         name,
@@ -85,7 +85,7 @@ export const SignUpSecondStep: FC = () => {
       setIsSignuping(false);
 
       if (error instanceof Yup.ValidationError) {
-        Alert.alert("Ops, não foi possível continuar!", error.inner[0].message);
+        Alert.alert("Ops, não foi possível continuar!", error.message);
         return;
       }
 

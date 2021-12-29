@@ -52,7 +52,7 @@ export const SignIn: FC = () => {
     try {
       setIsSigning(true);
 
-      await formSchema.validate(formData, { abortEarly: false });
+      await formSchema.validate(formData);
 
       await signIn(formData);
     } catch (error) {
@@ -61,7 +61,7 @@ export const SignIn: FC = () => {
       if (error instanceof Yup.ValidationError) {
         Alert.alert(
           "Ops, não foi possível entrar com a sua conta!",
-          error.inner[0].message
+          error.message
         );
         return;
       }

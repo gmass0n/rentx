@@ -12,7 +12,7 @@ export interface ButtonProps {
   isLoading?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
   disabled?: boolean;
-  onPress(): void;
+  onPress?(): void;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -22,7 +22,7 @@ export const Button: FC<ButtonProps> = ({
   disabled,
   title,
   containerStyle,
-  onPress,
+  onPress = () => null,
 }) => {
   return (
     <Container

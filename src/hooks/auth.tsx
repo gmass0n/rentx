@@ -23,11 +23,14 @@ interface SignInCredentials {
   password: string;
 }
 
+type UpdateUserData = Pick<User, "avatar" | "name" | "driver_license">;
+
 interface IAuthContextData {
   user: User | undefined;
   signIn(credentials: SignInCredentials): Promise<void>;
   isValidatingUser: boolean;
   signOut(): Promise<void>;
+  updateUser(data: UpdateUserData): Promise<void>;
 }
 
 const AuthContext = createContext({} as IAuthContextData);
@@ -54,49 +57,62 @@ const AuthProvider: FC = ({ children }) => {
   }, []);
 
   const signIn = useCallback(async (credentials: SignInCredentials) => {
-    try {
-      const response = await api.post<SessionDTO>("/sessions", credentials);
+    const response = await api.post<SessionDTO>("/sessions", credentials);
 
-      const { token, user } = response.data;
+    const { token, user } = response.data;
 
-      api.defaults.headers["Authorization"] = `Bearer ${token}`;
+    api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
-      const userCollection = database.get<ModelUser>("users");
-      await database.write(async () => {
-        await userCollection.create((newUser) => {
-          newUser.user_id = user.id;
-          newUser.name = user.name;
-          newUser.email = user.email;
-          newUser.driver_license = user.driver_license;
-          newUser.avatar = user.avatar;
-          newUser.token = token;
-        });
+    const userCollection = database.get<ModelUser>("users");
+    await database.write(async () => {
+      await userCollection.create((newUser) => {
+        newUser.user_id = user.id;
+        newUser.name = user.name;
+        newUser.email = user.email;
+        newUser.driver_license = user.driver_license;
+        newUser.avatar = user.avatar;
+        newUser.token = token;
       });
+    });
 
-      setUser({ ...user, user_id: user.id, token });
-    } catch (error) {
-      throw new Error(error);
-    }
+    setUser({ ...user, user_id: user.id, token });
   }, []);
 
   const signOut = useCallback(async () => {
-    try {
+    const userCollection = database.get<ModelUser>("users");
+
+    await database.write(async () => {
+      const selectedUser = await userCollection.find(user.id);
+
+      await selectedUser.destroyPermanently();
+
+      setUser(undefined);
+    });
+  }, [user]);
+
+  const updateUser = useCallback(
+    async (data: UpdateUserData) => {
       const userCollection = database.get<ModelUser>("users");
 
       await database.write(async () => {
         const selectedUser = await userCollection.find(user.id);
 
-        await selectedUser.destroyPermanently();
+        await selectedUser.update((userData) => {
+          userData.name = data.name;
+          userData.driver_license = data.driver_license;
+          userData.avatar = data.avatar;
+        });
 
-        setUser(undefined);
+        setUser((prevState) => ({ ...prevState, ...data }));
       });
-    } catch (error) {
-      throw new Error(error);
-    }
-  }, [user]);
+    },
+    [user]
+  );
 
   return (
-    <AuthContext.Provider value={{ signIn, user, isValidatingUser, signOut }}>
+    <AuthContext.Provider
+      value={{ signIn, user, isValidatingUser, signOut, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
