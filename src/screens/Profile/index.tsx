@@ -96,6 +96,24 @@ export const Profile: FC = () => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   }, []);
 
+  const handleSignout = () => {
+    Alert.alert(
+      "Tem certeza?",
+      "Se você sair, irá precisar de conexão com a internet para se conectar novamente.",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => null,
+          style: "destructive",
+        },
+        {
+          text: "Sair",
+          onPress: signOut,
+        },
+      ]
+    );
+  };
+
   const handleUpdateProfile = async () => {
     try {
       setIsUpdatingProfile(true);
@@ -145,7 +163,7 @@ export const Profile: FC = () => {
 
                 <Title>Perfil</Title>
 
-                <LogoutButton onPress={signOut}>
+                <LogoutButton onPress={handleSignout}>
                   <Feather
                     name="power"
                     size={RFValue(17)}
