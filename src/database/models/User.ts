@@ -13,8 +13,8 @@ export class User extends Model {
   @field("email")
   email!: string;
 
-  @field("driver_licesnse")
-  driver_licesnse!: string;
+  @field("driver_license")
+  driver_license!: string;
 
   @field("avatar")
   avatar!: string;

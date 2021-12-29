@@ -1,4 +1,4 @@
-package com.rentx;
+package com.gmass0n.rentx;
 
 import android.os.Build;
 import android.os.Bundle;

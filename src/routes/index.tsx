@@ -1,13 +1,16 @@
 import { FC } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+
 import { useAuth } from "../hooks/auth";
 
 import { AppTabRoutes } from "./AppTabRoutes";
-import { AppStackRoutes } from "./AppStackRoutes";
 import { AuthStackRoutes } from "./AuthStackRoutes";
+import AppLoading from "expo-app-loading";
 
 export const Routes: FC = () => {
-  const { user } = useAuth();
+  const { user, isValidatingUser } = useAuth();
+
+  if (isValidatingUser) return <AppLoading />;
 
   return (
     <NavigationContainer>

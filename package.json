@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "react-native start",
+    "start": "expo start --dev-client",
     "expor:start": "expo start",
     "android": "expo run:android",
-    "expo:ios": "expo run:ios",
-    "ios": "react-native run-ios",
+    "expo:ios": "expo run:ios --no-build-cache",
+    "ios": "react-native run-ios --simulator='iPhone 12 Pro'",
     "web": "expo start --web",
     "server": "json-server ./src/assets/server.json --host localhost --port 3333 --delay 700"
   },
@@ -40,7 +40,8 @@
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "expo-status-bar": "~1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

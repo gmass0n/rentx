@@ -45,19 +45,29 @@ export const MyCars: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     (async () => {
       try {
         const { data: schedulesByUser } = await api.get<ScheduleByUserDTO[]>(
           "/schedules_byuser?user_id=1"
         );
 
-        setAppointments(schedulesByUser);
+        if (isMounted) {
+          setAppointments(schedulesByUser);
+        }
       } catch (error) {
         console.log(error);
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     })();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -76,8 +86,6 @@ export const MyCars: FC = () => {
 
       <Header>
         <HeaderContent>
-          <BackButton color="shape" />
-
           <Title>
             Seus agendamentos,{"\n"}
             estão aqui.

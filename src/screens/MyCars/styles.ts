@@ -29,8 +29,6 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_600};
   font-size: ${RFValue(30)}px;
   line-height: ${RFValue(36)}px;
-
-  margin-top: ${RFValue(24)}px;
 `;
 
 export const Subtitle = styled.Text`

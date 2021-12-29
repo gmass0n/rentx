@@ -32,9 +32,9 @@ target 'rentx' do
     # Workaround `Cycle inside FBReactNativeSpec` error for react-native 0.64
     # Reference: https://github.com/software-mansion/react-native-screens/issues/842#issuecomment-812543933
     installer.pods_project.targets.each do |target|
-      # target.build_configurations.each do |config|
-      #   config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
-      #  end
+      target.build_configurations.each do |config|
+        config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+       end
 
       if (target.name&.eql?('FBReactNativeSpec'))
         target.build_phases.each do |build_phase|

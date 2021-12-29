@@ -16,7 +16,7 @@ export const userSchema = tableSchema({
       type: "string",
     },
     {
-      name: "driver_licesnse",
+      name: "driver_license",
       type: "string",
     },
     {

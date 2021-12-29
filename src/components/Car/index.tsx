@@ -21,10 +21,10 @@ import {
 
 interface CarProps extends RectButtonProps {
   data: CarDTO;
-  onPress(): void;
+  onPress?(): void;
 }
 
-export const Car: FC<CarProps> = ({ data, onPress }) => {
+export const Car: FC<CarProps> = ({ data, onPress = () => null }) => {
   const MotorIcon = getAccessoryIcon(data.fuel_type as any);
 
   return (
