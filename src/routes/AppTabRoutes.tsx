@@ -41,7 +41,6 @@ export const AppTabRoutes: FC = () => {
               height: RFValue(50),
             }),
       }}
-      initialRouteName="Profile"
     >
       <Screen
         name="AppStack"
