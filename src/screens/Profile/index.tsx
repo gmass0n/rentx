@@ -48,7 +48,7 @@ interface FormData {
 export const Profile: FC = () => {
   const theme = useTheme();
 
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const driverLicenseInputRef = useRef<TextInput>(null);
   const newPasswordInputRef = useRef<TextInput>(null);
@@ -102,7 +102,7 @@ export const Profile: FC = () => {
 
                 <Title>Perfil</Title>
 
-                <LogoutButton>
+                <LogoutButton onPress={signOut}>
                   <Feather
                     name="power"
                     size={RFValue(17)}

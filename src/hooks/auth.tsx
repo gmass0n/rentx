@@ -27,6 +27,7 @@ interface IAuthContextData {
   user: User | undefined;
   signIn(credentials: SignInCredentials): Promise<void>;
   isValidatingUser: boolean;
+  signOut(): Promise<void>;
 }
 
 const AuthContext = createContext({} as IAuthContextData);
@@ -78,8 +79,24 @@ const AuthProvider: FC = ({ children }) => {
     }
   }, []);
 
+  const signOut = useCallback(async () => {
+    try {
+      const userCollection = database.get<ModelUser>("users");
+
+      await database.write(async () => {
+        const selectedUser = await userCollection.find(user.id);
+
+        await selectedUser.destroyPermanently();
+
+        setUser(undefined);
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }, [user]);
+
   return (
-    <AuthContext.Provider value={{ signIn, user, isValidatingUser }}>
+    <AuthContext.Provider value={{ signIn, user, isValidatingUser, signOut }}>
       {children}
     </AuthContext.Provider>
   );
