@@ -36,7 +36,7 @@ import {
   Form,
 } from "./styles";
 
-type CurrentOption = "dataForm" | "passwordForm";
+type CurrentOption = "dataForm" | "changePasswordForm";
 
 interface FormData {
   avatar: string;
@@ -75,7 +75,7 @@ export const Profile: FC = () => {
 
   const handleToggleCurrentOption = () => {
     setCurrentOption((prevState) =>
-      prevState === "dataForm" ? "passwordForm" : "dataForm"
+      prevState === "dataForm" ? "changePasswordForm" : "dataForm"
     );
   };
 
@@ -178,11 +178,11 @@ export const Profile: FC = () => {
               </Option>
 
               <Option
-                isActive={currentOption === "passwordForm"}
+                isActive={currentOption === "changePasswordForm"}
                 onPress={handleToggleCurrentOption}
               >
-                <OptionTitle isActive={currentOption === "passwordForm"}>
-                  Senha
+                <OptionTitle isActive={currentOption === "changePasswordForm"}>
+                  Trocar senha
                 </OptionTitle>
               </Option>
             </Options>
