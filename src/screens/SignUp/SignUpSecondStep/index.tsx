@@ -143,7 +143,7 @@ export const SignUpSecondStep: FC = () => {
               <Input
                 name="passwordConfirmation"
                 icon="lock"
-                placeholder="Digite a senha novamente"
+                placeholder="Confirme sua senha"
                 secureTextEntry
                 value={formData.passwordConfirmation}
                 onChangeValue={handelChangeValue}

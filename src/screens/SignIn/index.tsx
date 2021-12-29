@@ -82,7 +82,7 @@ export const SignIn: FC = () => {
         justifyContent: "center",
       }}
     >
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
           <StatusBar
             barStyle="dark-content"

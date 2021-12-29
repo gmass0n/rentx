@@ -49,7 +49,8 @@ const BaseInput: ForwardRefRenderFunction<TextInput, InputProps> = (
   },
   ref: MutableRefObject<TextInput>
 ) => {
-  const passwordRef = ref || useRef<TextInput>(null);
+  const inputRef = useRef<TextInput>(null);
+  const newInputRef = ref || inputRef;
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -66,7 +67,7 @@ const BaseInput: ForwardRefRenderFunction<TextInput, InputProps> = (
   }, [isFilled, value]);
 
   const toggleIsPasswordVisible = () => {
-    passwordRef?.current?.focus();
+    newInputRef?.current?.focus();
 
     setIsPasswordVisible((prevState) => !prevState);
   };
@@ -107,7 +108,7 @@ const BaseInput: ForwardRefRenderFunction<TextInput, InputProps> = (
         onBlur={handleBlur}
         onChangeText={(text) => onChangeValue(text, name)}
         value={value}
-        ref={passwordRef}
+        ref={newInputRef}
         {...rest}
       />
 
@@ -115,7 +116,7 @@ const BaseInput: ForwardRefRenderFunction<TextInput, InputProps> = (
         <BorderlessButton onPress={toggleIsPasswordVisible}>
           <PasswordButtonContent isFocused={isFocused}>
             <Feather
-              name={isPasswordVisible ? "eye" : "eye-off"}
+              name={isPasswordVisible ? "eye-off" : "eye"}
               size={RFValue(18)}
               color={
                 isFocused || isFilled
